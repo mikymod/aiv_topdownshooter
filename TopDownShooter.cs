@@ -4,18 +4,15 @@ namespace TopDownShooterAIV
 {
     class TopDownShooter
     {
-        private Window window;
-        private Camera camera;
+        
 
         private Player player;
 
         public TopDownShooter()
         {
-            window = new Window(640, 480, "Top Down Shooter", false);
-            camera = new Camera();
-            window.SetCamera(camera);
+            GameManager.Init();
 
-            player = new Player(window);
+            player = new Player();
         }
 
         void Update()
@@ -25,10 +22,10 @@ namespace TopDownShooterAIV
 
         public void Run()
         {
-            while (window.IsOpened)
+            while (GameManager.Window.IsOpened)
             {
                 Update();
-                window.Update();
+                GameManager.Window.Update();
             }
         }
 

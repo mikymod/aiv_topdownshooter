@@ -10,61 +10,85 @@ namespace TopDownShooterAIV
 {
     class Player
     {
-        private Window window;
         private Texture texture;
-        private Sprite sprite;
+        private Sprite playerSprite;
+
         private float speed = 50f;
 
         private int frameDim = 24;
 
+        private Rifle rifle;
 
-        public Player(Window window)
+        public Vector2 Position
         {
-            this.window = window;
+            get => playerSprite.position;
+            set => playerSprite.position = value;
+        }
+
+        public bool FacingRight
+        {
+            get => !playerSprite.FlipX;
+        }
+
+        public Texture Texture { get => texture; }
+
+        public Player()
+        {
             texture = new Texture("Assets/Player.png");
-            sprite = new Sprite(24, 24);
-            sprite.position = new Vector2(window.Width / 2, window.Height / 2);
+
+            playerSprite = new Sprite(frameDim, frameDim);
+            playerSprite.pivot = new Vector2(playerSprite.Width / 2, playerSprite.Height / 2);
+            playerSprite.position = new Vector2(GameManager.Window.Width / 2, GameManager.Window.Height / 2);
+
+            rifle = new Rifle(this);
         }
 
         public void Update()
         {
             Move();
 
-            if (window.MouseLeft)
+            if (GameManager.Window.MouseLeft)
             {
                 Fire();
             }
 
             // TODO: Animation
-            sprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
+            playerSprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
+
+            rifle.Update();
         }
 
         private void Move()
         {
-            if (window.GetKey(KeyCode.D))
+            if (GameManager.Window.GetKey(KeyCode.D))
             {
-                sprite.position += new Vector2(1, 0) * speed * window.DeltaTime;
-                sprite.FlipX = false;
+                playerSprite.position += new Vector2(1, 0) * speed * GameManager.Window.DeltaTime;
+                playerSprite.FlipX = false;
             }
-            if (window.GetKey(KeyCode.A))
+            if (GameManager.Window.GetKey(KeyCode.A))
             {
-                sprite.position += new Vector2(-1, 0) * speed * window.DeltaTime;
-                sprite.FlipX = true;
+                playerSprite.position += new Vector2(-1, 0) * speed * GameManager.Window.DeltaTime;
+                playerSprite.FlipX = true;
             }
-            if (window.GetKey(KeyCode.W))
+            if (GameManager.Window.GetKey(KeyCode.W))
             {
-                sprite.position += new Vector2(0, -1) * speed * window.DeltaTime;
+                playerSprite.position += new Vector2(0, -1) * speed * GameManager.Window.DeltaTime;
             }
-            if (window.GetKey(KeyCode.S))
+            if (GameManager.Window.GetKey(KeyCode.S))
             {
-                sprite.position += new Vector2(0, 1) * speed * window.DeltaTime;
+                playerSprite.position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
             }
+        }
+
+        private Vector2 RifleDirection()
+        {
+            var mouseAbsolutePos = GameManager.Window.MousePosition + GameManager.Window.CurrentCamera.position - GameManager.Window.CurrentCamera.pivot;
+            return (mouseAbsolutePos - playerSprite.position).Normalized();
         }
 
         private void Fire()
         {
-            var mouseAbsolutePos = window.MousePosition + window.CurrentCamera.position - window.CurrentCamera.pivot;
-            var direction = (mouseAbsolutePos - sprite.position).Normalized();
+            var direction = RifleDirection();
             Console.WriteLine("Fire! : " + direction);
         }
     }
