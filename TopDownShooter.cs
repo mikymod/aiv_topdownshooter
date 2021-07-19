@@ -26,8 +26,12 @@ namespace TopDownShooterAIV
             {
                 Update();
                 GameManager.Window.Update();
+
+                if (GameManager.Window.GetKey(KeyCode.Esc))
+                {
+                    break;
+                }
             }
         }
-
     }
 }
