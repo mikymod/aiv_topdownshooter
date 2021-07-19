@@ -10,7 +10,6 @@ namespace TopDownShooterAIV
 {
     class Player
     {
-        private Texture texture;
         private Sprite playerSprite;
 
         private float speed = 50f;
@@ -30,11 +29,8 @@ namespace TopDownShooterAIV
             get => !playerSprite.FlipX;
         }
 
-        public Texture Texture { get => texture; }
-
         public Player()
         {
-            texture = new Texture("Assets/Player.png");
 
             playerSprite = new Sprite(frameDim, frameDim);
             playerSprite.pivot = new Vector2(playerSprite.Width / 2, playerSprite.Height / 2);
@@ -48,7 +44,7 @@ namespace TopDownShooterAIV
             Move();
 
             // TODO: Animation
-            playerSprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
+            playerSprite.DrawTexture(GameManager.Texture, 0, 0, frameDim, frameDim);
 
             rifle.Update();
         }

@@ -11,6 +11,8 @@ namespace TopDownShooterAIV
     {
         public static Window Window { get; private set; }
         public static Camera Camera { get; private set; }
+        public static Texture Texture { get; private set; }
+
         public static float DeltaTime { get { return Window.DeltaTime; } }
 
         public static void Init()
@@ -21,6 +23,8 @@ namespace TopDownShooterAIV
 
             Camera = new Camera();
             Window.SetCamera(Camera);
+
+            Texture = new Texture("Assets/Player.png");
         }
     }
 }
