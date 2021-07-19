@@ -32,12 +32,23 @@ namespace TopDownShooterAIV
             var rifleDirection = RifleDirection();
             rifleSprite.Rotation = (float)Math.Atan2(rifleDirection.Y, rifleDirection.X);
             rifleSprite.DrawTexture(player.Texture, 24 * 5, 24 * 3, frameDim, frameDim);
+
+            if (GameManager.Window.MouseLeft)
+            {
+                Shoot();
+            }
         }
 
         private Vector2 RifleDirection()
         {
             var mouseAbsolutePos = GameManager.Window.MousePosition + GameManager.Window.CurrentCamera.position - GameManager.Window.CurrentCamera.pivot;
             return (mouseAbsolutePos - player.Position).Normalized();
+        }
+
+        private void Shoot()
+        {
+            var direction = RifleDirection();
+            Console.WriteLine("Fire! : " + direction);
         }
     }
 }

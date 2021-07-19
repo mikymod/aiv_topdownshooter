@@ -47,11 +47,6 @@ namespace TopDownShooterAIV
         {
             Move();
 
-            if (GameManager.Window.MouseLeft)
-            {
-                Fire();
-            }
-
             // TODO: Animation
             playerSprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
 
@@ -78,18 +73,6 @@ namespace TopDownShooterAIV
             {
                 playerSprite.position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
             }
-        }
-
-        private Vector2 RifleDirection()
-        {
-            var mouseAbsolutePos = GameManager.Window.MousePosition + GameManager.Window.CurrentCamera.position - GameManager.Window.CurrentCamera.pivot;
-            return (mouseAbsolutePos - playerSprite.position).Normalized();
-        }
-
-        private void Fire()
-        {
-            var direction = RifleDirection();
-            Console.WriteLine("Fire! : " + direction);
         }
     }
 }
