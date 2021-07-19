@@ -10,6 +10,7 @@ namespace TopDownShooterAIV
     {
         static void Main(string[] args)
         {
+            new TopDownShooter().Run();
         }
     }
 }
