@@ -35,8 +35,6 @@ namespace TopDownShooterAIV
             base.Update();
 
             Move();
-
-            rifle.Update();
         }
 
         public override void Draw()
