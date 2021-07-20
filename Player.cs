@@ -8,66 +8,64 @@ using System.Threading.Tasks;
 
 namespace TopDownShooterAIV
 {
-    class Player
+    class Player : GameObject
     {
-        private Sprite playerSprite;
-
         private float speed = 50f;
-
         private int frameDim = 24;
 
         private Rifle rifle;
 
-        public Vector2 Position
-        {
-            get => playerSprite.position;
-            set => playerSprite.position = value;
-        }
-
         public bool FacingRight
         {
-            get => !playerSprite.FlipX;
+            get => !sprite.FlipX;
         }
 
         public Player()
         {
 
-            playerSprite = new Sprite(frameDim, frameDim);
-            playerSprite.pivot = new Vector2(playerSprite.Width / 2, playerSprite.Height / 2);
-            playerSprite.position = new Vector2(GameManager.Window.Width / 2, GameManager.Window.Height / 2);
+            sprite = new Sprite(frameDim, frameDim);
+            sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            sprite.position = new Vector2(GameManager.Window.Width / 2, GameManager.Window.Height / 2);
 
             rifle = new Rifle(this);
         }
 
-        public void Update()
+        public override void Update()
         {
+            base.Update();
+
             Move();
 
-            // TODO: Animation
-            playerSprite.DrawTexture(GameManager.Texture, 0, 0, frameDim, frameDim);
-
             rifle.Update();
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
+
+            // TODO: Animation
+            sprite.DrawTexture(GameManager.Texture, 0, 0, frameDim, frameDim);
         }
 
         private void Move()
         {
             if (GameManager.Window.GetKey(KeyCode.D))
             {
-                playerSprite.position += new Vector2(1, 0) * speed * GameManager.Window.DeltaTime;
-                playerSprite.FlipX = false;
+                sprite.position += new Vector2(1, 0) * speed * GameManager.Window.DeltaTime;
+                sprite.FlipX = false;
             }
             if (GameManager.Window.GetKey(KeyCode.A))
             {
-                playerSprite.position += new Vector2(-1, 0) * speed * GameManager.Window.DeltaTime;
-                playerSprite.FlipX = true;
+                sprite.position += new Vector2(-1, 0) * speed * GameManager.Window.DeltaTime;
+                sprite.FlipX = true;
             }
             if (GameManager.Window.GetKey(KeyCode.W))
             {
-                playerSprite.position += new Vector2(0, -1) * speed * GameManager.Window.DeltaTime;
+                sprite.position += new Vector2(0, -1) * speed * GameManager.Window.DeltaTime;
             }
             if (GameManager.Window.GetKey(KeyCode.S))
             {
-                playerSprite.position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
+                sprite.position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
             }
         }
     }

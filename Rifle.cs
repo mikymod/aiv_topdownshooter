@@ -8,47 +8,55 @@ using System.Threading.Tasks;
 
 namespace TopDownShooterAIV
 {
-    class Rifle
+    class Rifle : GameObject
     {
         private Player player;
-
-        private Sprite rifleSprite;
 
         private int frameDim = 24;
         private int offsetX = 8;
 
-        private List<Bullet> bullets = new List<Bullet>(8);
+        private List<Bullet> bullets = new List<Bullet>();
 
-        public Vector2 Position
-        {
-            get => player.Position + new Vector2(offsetX, 0);
-        }
+        private int maxNumBullet = 16;
+        private int numShoot = 0;
 
         public Rifle(Player player)
         {
             this.player = player;
 
-            rifleSprite = new Sprite(frameDim, frameDim);
-            rifleSprite.pivot = new Vector2(rifleSprite.Width / 2, rifleSprite.Height / 2);
-            rifleSprite.position = player.Position;
+            sprite = new Sprite(frameDim, frameDim);
+            sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            sprite.position = player.Position;
+
+            for (int i = 0; i < maxNumBullet; i++)
+            {
+                var bullet = new Bullet(this);
+                bullet.Enabled = false;
+
+                bullets.Add(bullet);
+                GameManager.AddGameObject(bullet);
+            }
         }
 
-        public void Update()
+        public override void Update()
         {
-            rifleSprite.position = player.Position + new Vector2(offsetX, 0);
+            base.Update();
+
+            sprite.position = player.Position + new Vector2(offsetX, 0);
             var rifleDirection = RifleDirection();
-            rifleSprite.Rotation = (float)Math.Atan2(rifleDirection.Y, rifleDirection.X);
-            rifleSprite.DrawTexture(GameManager.Texture, 24 * 5, 24 * 3, frameDim, frameDim);
+            sprite.Rotation = (float)Math.Atan2(rifleDirection.Y, rifleDirection.X);
 
             if (GameManager.Window.MouseLeft)
             {
                 Shoot();
             }
+        }
 
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                bullets[i].Update();
-            }
+        public override void Draw()
+        {
+            base.Draw();
+
+            sprite.DrawTexture(GameManager.Texture, 24 * 5, 24 * 3, frameDim, frameDim);
         }
 
         private Vector2 RifleDirection()
@@ -60,12 +68,14 @@ namespace TopDownShooterAIV
         private void Shoot()
         {
             var direction = RifleDirection();
-            var bullet = new Bullet(this);
+            var bullet = bullets[numShoot % maxNumBullet];
+            bullet.Enabled = true;
             bullet.Position = Position;
             bullet.Direction = direction;
-            bullets.Add(bullet);
 
-            Console.WriteLine("Fire! : " + direction);
+            Console.WriteLine($"Fire {numShoot % maxNumBullet} Bullet. Total:{numShoot}");
+
+            numShoot++;
         }
     }
 }

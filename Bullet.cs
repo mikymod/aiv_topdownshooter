@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 
 namespace TopDownShooterAIV
 {
-    class Bullet
+    class Bullet : GameObject
     {
         private Rifle rifle;
 
-        private Sprite sprite;
-
         public Vector2 Direction { get; set; }
-        public Vector2 Position { get; set; }
         public float Speed { get; set; }
 
         public Bullet(Rifle rifle)
@@ -29,9 +26,27 @@ namespace TopDownShooterAIV
             Speed = 200;
         }
 
-        public void Update()
+        public override void Update()
         {
+            base.Update();
+
+            if (!Enabled)
+            {
+                return;
+            }
+
             sprite.position += Direction * Speed * GameManager.Window.DeltaTime;
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
+
+            if (!Enabled)
+            {
+                return;
+            }
+
             sprite.DrawTexture(GameManager.Texture, 24 * 4, 24 * 3, 24, 24);
         }
     }

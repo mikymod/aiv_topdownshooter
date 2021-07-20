@@ -15,9 +15,11 @@ namespace TopDownShooterAIV
 
         public static float DeltaTime { get { return Window.DeltaTime; } }
 
+        private static List<GameObject> gameObjects = new List<GameObject>();
+
         public static void Init()
         {
-            Window = new Window(640, 480, "Top Down Shooter", true);
+            Window = new Window(640, 480, "Top Down Shooter", false);
             Window.SetVSync(false);
             //Window.SetDefaultViewportOrthographicSize(48);
 
@@ -26,5 +28,17 @@ namespace TopDownShooterAIV
 
             Texture = new Texture("Assets/Player.png");
         }
+
+        public static void Update()
+        {
+            gameObjects.ForEach((obj) => obj.Update());
+        }
+
+        public static void Draw()
+        {
+            gameObjects.ForEach((obj) => obj.Draw());
+        }
+
+        public static void AddGameObject(GameObject go) => gameObjects.Add(go);
     }
 }

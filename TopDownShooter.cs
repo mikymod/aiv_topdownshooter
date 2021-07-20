@@ -5,26 +5,24 @@ namespace TopDownShooterAIV
     class TopDownShooter
     {
         
-
-        private Player player;
-
         public TopDownShooter()
         {
             GameManager.Init();
 
-            player = new Player();
-        }
+            var player = new Player();
+            var rifle = new Rifle(player);
 
-        void Update()
-        {
-            player.Update();
+            GameManager.AddGameObject(player);
+            GameManager.AddGameObject(rifle);
         }
 
         public void Run()
         {
             while (GameManager.Window.IsOpened)
             {
-                Update();
+                GameManager.Update();
+                GameManager.Draw();
+
                 GameManager.Window.Update();
 
                 if (GameManager.Window.GetKey(KeyCode.Esc))
