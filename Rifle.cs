@@ -20,6 +20,10 @@ namespace TopDownShooterAIV
         private int maxNumBullet = 16;
         private int numShoot = 0;
 
+        private float shootCooldown = 0.25f;
+        private float timer = 0;
+        private bool shooted;
+
         public Rifle(Player player)
         {
             this.player = player;
@@ -46,9 +50,19 @@ namespace TopDownShooterAIV
             var rifleDirection = RifleDirection();
             sprite.Rotation = (float)Math.Atan2(rifleDirection.Y, rifleDirection.X);
 
-            if (GameManager.Window.MouseLeft)
+            if (GameManager.Window.MouseLeft && !shooted)
             {
                 Shoot();
+            }
+
+            if (shooted)
+            {
+                timer += GameManager.DeltaTime;
+                if (timer >= shootCooldown)
+                {
+                    shooted = false;
+                    timer = 0;
+                }
             }
         }
 
@@ -76,6 +90,8 @@ namespace TopDownShooterAIV
             Console.WriteLine($"Fire {numShoot % maxNumBullet} Bullet. Total:{numShoot}");
 
             numShoot++;
+
+            shooted = true;
         }
     }
 }
