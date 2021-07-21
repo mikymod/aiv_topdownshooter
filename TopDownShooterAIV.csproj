@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
+    <Compile Include="Collider.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameManager.cs" />
