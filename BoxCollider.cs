@@ -38,6 +38,13 @@ namespace TopDownShooterAIV
                 collisionInfo.collider = GameObject;
                 collisionInfo.other = other.GameObject;
                 collisionInfo.type = CollisionType.RectsIntersection;
+
+                // Evaluate delta for wall collisions
+                var distance = other.Position - Position;
+                float dx = Math.Abs(distance.X) - (other.halfWidth + halfWidth);
+                float dy = Math.Abs(distance.Y) - (other.halfHeight + halfHeight);
+
+                collisionInfo.delta = new Vector2(-dx, -dy);
             }
 
             return result;

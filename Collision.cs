@@ -14,5 +14,6 @@ namespace TopDownShooterAIV
         public GameObject collider;
         public GameObject other;
         public CollisionType type;
+        public Vector2 delta;
     }
 }
