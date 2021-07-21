@@ -17,6 +17,8 @@ namespace TopDownShooterAIV
 
         private static List<GameObject> gameObjects = new List<GameObject>();
 
+        private static Collision collision = new Collision();
+
         public static void Init()
         {
             Window = new Window(640, 480, "Top Down Shooter", false);
@@ -31,6 +33,7 @@ namespace TopDownShooterAIV
 
         public static void Update()
         {
+            CheckCollisions();
             gameObjects.ForEach((obj) => obj.Update());
         }
 
@@ -40,5 +43,29 @@ namespace TopDownShooterAIV
         }
 
         public static void AddGameObject(GameObject go) => gameObjects.Add(go);
+
+        public static void CheckCollisions()
+        {
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                for (int j = i + 1; j < gameObjects.Count; j++)
+                {
+                    if (!gameObjects[j].Enabled)
+                    {
+                        continue;
+                    }
+
+                    if (gameObjects[i].Collider == null || gameObjects[j].Collider == null)
+                    {
+                        continue;
+                    }
+
+                    if (gameObjects[i].Collider.Collides(gameObjects[j].Collider, ref collision))
+                    {
+                        gameObjects[i].OnCollide(collision);
+                    }
+                }
+            }
+        }
     }
 }

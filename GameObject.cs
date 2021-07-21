@@ -12,12 +12,15 @@ namespace TopDownShooterAIV
     {
         protected Sprite sprite;
         protected Texture texture;
+        protected Collider collider;
 
         public virtual Vector2 Position
         {
             get { return sprite.position; }
             set { sprite.position = value; }
         }
+
+        public Collider Collider { get => collider; }
 
         public float X { get { return sprite.position.X; } set { sprite.position.X = value; } }
         public float Y { get { return sprite.position.Y; } set { sprite.position.Y = value; } }
@@ -32,6 +35,11 @@ namespace TopDownShooterAIV
         {
             sprite = null;
             texture = null;
+        }
+
+        public virtual void OnCollide(Collision collision)
+        {
+            Console.WriteLine($"{collision.collider} collides with {collision.other}");
         }
     }
 }

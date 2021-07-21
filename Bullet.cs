@@ -24,6 +24,8 @@ namespace TopDownShooterAIV
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
 
             Speed = 200;
+
+            collider = new CircleCollider(this, 4);
         }
 
         public override void Update()

@@ -28,6 +28,8 @@ namespace TopDownShooterAIV
             sprite.position = new Vector2(GameManager.Window.Width / 2, GameManager.Window.Height / 2);
 
             rifle = new Rifle(this);
+
+            collider = new BoxCollider(this, sprite.Width, sprite.Height);
         }
 
         public override void Update()
@@ -41,7 +43,6 @@ namespace TopDownShooterAIV
         {
             base.Draw();
 
-            // TODO: Animation
             sprite.DrawTexture(GameManager.Texture, 0, 0, frameDim, frameDim);
         }
 
