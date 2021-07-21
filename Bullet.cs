@@ -56,10 +56,9 @@ namespace TopDownShooterAIV
         {
             base.OnCollide(collision);
 
-            if (collision.collider is Enemy)
+            if (collision.other is Enemy)
             {
-                Console.WriteLine($"{collision.collider} collides with {collision.other}");
-                collision.other.Enabled = false;
+                Enabled = false;
             }
         }
     }

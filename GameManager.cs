@@ -21,7 +21,7 @@ namespace TopDownShooterAIV
 
         public static void Init()
         {
-            Window = new Window(640, 480, "Top Down Shooter", true);
+            Window = new Window(640, 480, "Top Down Shooter", false);
             Window.SetVSync(false);
             //Window.SetDefaultViewportOrthographicSize(48);
 
@@ -67,7 +67,14 @@ namespace TopDownShooterAIV
 
                     if (gameObjects[i].Collider.Collides(gameObjects[j].Collider, ref collision))
                     {
+                        collision.other = gameObjects[j];
                         gameObjects[i].OnCollide(collision);
+                    }
+
+                    if (gameObjects[j].Collider.Collides(gameObjects[i].Collider, ref collision))
+                    {
+                        collision.other = gameObjects[i];
+                        gameObjects[j].OnCollide(collision);
                     }
                 }
             }

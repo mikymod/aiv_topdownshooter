@@ -34,8 +34,6 @@ namespace TopDownShooterAIV
 
             if (result)
             {
-                collisionInfo.collider = GameObject;
-                collisionInfo.other = other.GameObject;
                 collisionInfo.type = CollisionType.CirclesIntersection;
             }
 

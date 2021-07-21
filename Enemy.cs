@@ -10,6 +10,8 @@ namespace TopDownShooterAIV
 {
     class Enemy : GameObject
     {
+        private int health = 5;
+
         public Enemy() : base()
         {
             texture = new Texture("Assets/enemy.png");
@@ -25,19 +27,27 @@ namespace TopDownShooterAIV
         {
             base.Draw();
 
+            if (!Enabled)
+            {
+                return;
+            }
+
             sprite.DrawTexture(texture, 0, 0, 24, 24);
         }
 
-        //public override void OnCollide(Collision collision)
-        //{
-        //    base.OnCollide(collision);
+        public override void OnCollide(Collision collision)
+        {
+            base.OnCollide(collision);
 
-        //    if (collision.other is Bullet)
-        //    {
-        //        Console.WriteLine("SBAM");
-        //    }
-            
-        //    Console.WriteLine("SBAM");
-        //}
+            if (collision.other is Bullet)
+            {
+                Console.WriteLine("SBAM");
+                health--;
+                if (health <= 0)
+                {
+                    Enabled = false;
+                }
+            }
+        }
     }
 }

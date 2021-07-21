@@ -35,8 +35,6 @@ namespace TopDownShooterAIV
 
             if (result)
             {
-                collisionInfo.collider = GameObject;
-                collisionInfo.other = other.GameObject;
                 collisionInfo.type = CollisionType.RectsIntersection;
 
                 // Evaluate delta for wall collisions
@@ -58,8 +56,6 @@ namespace TopDownShooterAIV
 
             if (result)
             {
-                collisionInfo.collider = GameObject;
-                collisionInfo.other = other.GameObject;
                 collisionInfo.type = CollisionType.CircleRectIntersection;
             }
 
