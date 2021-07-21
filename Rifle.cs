@@ -24,7 +24,7 @@ namespace TopDownShooterAIV
         private float timer = 0;
         private bool shooted;
 
-        public Rifle(Player player)
+        public Rifle(Player player) : base()
         {
             this.player = player;
 

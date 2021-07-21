@@ -21,7 +21,7 @@ namespace TopDownShooterAIV
 
         public static void Init()
         {
-            Window = new Window(640, 480, "Top Down Shooter", false);
+            Window = new Window(640, 480, "Top Down Shooter", true);
             Window.SetVSync(false);
             //Window.SetDefaultViewportOrthographicSize(48);
 
@@ -48,6 +48,11 @@ namespace TopDownShooterAIV
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
+                if (!gameObjects[i].Enabled)
+                {
+                    continue;
+                }
+
                 for (int j = i + 1; j < gameObjects.Count; j++)
                 {
                     if (!gameObjects[j].Enabled)

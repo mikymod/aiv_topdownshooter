@@ -13,21 +13,17 @@ namespace TopDownShooterAIV
         private float speed = 50f;
         private int frameDim = 24;
 
-        private Rifle rifle;
-
         public bool FacingRight
         {
             get => !sprite.FlipX;
         }
 
-        public Player()
+        public Player() : base()
         {
 
             sprite = new Sprite(frameDim, frameDim);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
             sprite.position = new Vector2(GameManager.Window.Width / 2, GameManager.Window.Height / 2);
-
-            rifle = new Rifle(this);
 
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
         }

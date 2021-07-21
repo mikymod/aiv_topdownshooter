@@ -11,9 +11,12 @@ namespace TopDownShooterAIV
 
             var player = new Player();
             var rifle = new Rifle(player);
+            var enemy = new Enemy();
 
             GameManager.AddGameObject(player);
             GameManager.AddGameObject(rifle);
+            GameManager.AddGameObject(enemy);
+
         }
 
         public void Run()

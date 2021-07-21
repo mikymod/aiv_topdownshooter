@@ -14,6 +14,7 @@ namespace TopDownShooterAIV
         protected Texture texture;
         protected Collider collider;
 
+
         public virtual Vector2 Position
         {
             get { return sprite.position; }
@@ -27,6 +28,11 @@ namespace TopDownShooterAIV
 
         public bool Enabled { get; set; }
 
+        protected GameObject()
+        {
+            Enabled = true;
+        }
+
         public virtual void Update() {}
 
         public virtual void Draw() {}
@@ -39,7 +45,7 @@ namespace TopDownShooterAIV
 
         public virtual void OnCollide(Collision collision)
         {
-            Console.WriteLine($"{collision.collider} collides with {collision.other}");
+            //Console.WriteLine($"{collision.collider} collides with {collision.other}");
         }
     }
 }

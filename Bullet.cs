@@ -15,7 +15,7 @@ namespace TopDownShooterAIV
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
 
-        public Bullet(Rifle rifle)
+        public Bullet(Rifle rifle) : base()
         {
             this.rifle = rifle;
 
@@ -50,6 +50,17 @@ namespace TopDownShooterAIV
             }
 
             sprite.DrawTexture(GameManager.Texture, 24 * 4, 24 * 3, 24, 24);
+        }
+
+        public override void OnCollide(Collision collision)
+        {
+            base.OnCollide(collision);
+
+            if (collision.collider is Enemy)
+            {
+                Console.WriteLine($"{collision.collider} collides with {collision.other}");
+                collision.other.Enabled = false;
+            }
         }
     }
 }
