@@ -23,14 +23,23 @@ namespace TopDownShooterAIV
 
         public override bool Collides(BoxCollider collider, ref Collision collisionInfo)
         {
-            throw new NotImplementedException();
+            return collider.Collides(this, ref collisionInfo);
         }
 
-        public override bool Collides(CircleCollider collider, ref Collision collisionInfo)
+        public override bool Collides(CircleCollider other, ref Collision collisionInfo)
         {
-            var distance = Position - collider.Position;
+            var distance = Position - other.Position;
             var squaredDistance = Math.Sqrt(distance.X * distance.X + distance.Y * distance.Y);
-            return squaredDistance < Radius + collider.Radius;
+            var result = squaredDistance < Radius + other.Radius;
+
+            if (result)
+            {
+                collisionInfo.collider = GameObject;
+                collisionInfo.other = other.GameObject;
+                collisionInfo.type = CollisionType.CirclesIntersection;
+            }
+
+            return result;
         }
     }
 }

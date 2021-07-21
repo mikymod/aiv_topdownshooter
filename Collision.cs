@@ -11,8 +11,8 @@ namespace TopDownShooterAIV
 
     public class Collision
     {
-        public GameObject Collider;
-        public Vector2 Delta;
-        public CollisionType Type;
+        public GameObject collider;
+        public GameObject other;
+        public CollisionType type;
     }
 }

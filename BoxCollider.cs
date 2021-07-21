@@ -28,15 +28,35 @@ namespace TopDownShooterAIV
 
         public override bool Collides(BoxCollider other, ref Collision collisionInfo)
         {
-            return Position.X < other.Position.X + other.Width &&
-                   Position.X + Width > other.Position.X &&
-                   Position.Y < other.Position.Y + other.Height &&
-                   Position.Y + Height > other.Position.Y;
+            var result = Position.X < other.Position.X + other.Width &&
+                         Position.X + Width > other.Position.X &&
+                         Position.Y < other.Position.Y + other.Height &&
+                         Position.Y + Height > other.Position.Y;
+
+            if (result)
+            {
+                collisionInfo.collider = GameObject;
+                collisionInfo.other = other.GameObject;
+                collisionInfo.type = CollisionType.RectsIntersection;
+            }
+
+            return result;
         }
 
-        public override bool Collides(CircleCollider collider, ref Collision collisionInfo)
+        public override bool Collides(CircleCollider other, ref Collision collisionInfo)
         {
-            throw new NotImplementedException();
+            float deltaX = other.Position.X - Math.Max(Position.X - halfWidth, Math.Min(other.Position.X, Position.X + halfWidth));
+            float deltaY = other.Position.Y - Math.Max(Position.Y - halfHeight, Math.Min(other.Position.Y, Position.Y + halfHeight));
+            var result = (deltaX * deltaX + deltaY * deltaY) < (other.Radius * other.Radius);
+
+            if (result)
+            {
+                collisionInfo.collider = GameObject;
+                collisionInfo.other = other.GameObject;
+                collisionInfo.type = CollisionType.CircleRectIntersection;
+            }
+
+            return result;
         }
     }
 }
