@@ -1,4 +1,5 @@
 ﻿using Aiv.Fast2D;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,12 @@ namespace TopDownShooterAIV
 
         public static void Init()
         {
-            Window = new Window(640, 480, "Top Down Shooter", false);
+            Window = new Window(640, 360, "Top Down Shooter", true);
+            Window.SetResolution(320, 180);
             Window.SetVSync(false);
-            //Window.SetDefaultViewportOrthographicSize(48);
 
-            Camera = new Camera();
+            Camera = new Camera(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
+            Camera.pivot = new Vector2(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
             Window.SetCamera(Camera);
 
             Texture = new Texture("Assets/Player.png");
