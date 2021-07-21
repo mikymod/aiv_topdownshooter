@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TopDownShooterAIV
 {
-    abstract class Collider
+    public abstract class Collider
     {
         public GameObject GameObject;
 
@@ -21,5 +21,6 @@ namespace TopDownShooterAIV
         }
 
         public abstract bool Collides(Collider collider, ref Collision collisionInfo);
+        public abstract bool Collides(BoxCollider collider, ref Collision collisionInfo);
     }
 }

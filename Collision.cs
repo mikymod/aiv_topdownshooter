@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TopDownShooterAIV
 {
-    enum CollisionType { None, RectsIntersection, CirclesIntersection, CircleRectIntersection }
+    public enum CollisionType { None, RectsIntersection, CirclesIntersection, CircleRectIntersection }
 
-    class Collision
+    public class Collision
     {
         public GameObject Collider;
         public Vector2 Delta;
