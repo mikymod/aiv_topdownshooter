@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BoxCollider.cs" />
     <Compile Include="Bullet.cs" />
+    <Compile Include="CircleCollider.cs" />
     <Compile Include="Collider.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="GameObject.cs" />

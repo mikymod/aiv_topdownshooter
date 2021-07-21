@@ -22,5 +22,6 @@ namespace TopDownShooterAIV
 
         public abstract bool Collides(Collider collider, ref Collision collisionInfo);
         public abstract bool Collides(BoxCollider collider, ref Collision collisionInfo);
+        public abstract bool Collides(CircleCollider collider, ref Collision collisionInfo);
     }
 }

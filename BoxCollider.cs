@@ -33,5 +33,10 @@ namespace TopDownShooterAIV
                    Position.Y < other.Position.Y + other.Height &&
                    Position.Y + Height > other.Position.Y;
         }
+
+        public override bool Collides(CircleCollider collider, ref Collision collisionInfo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
