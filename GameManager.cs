@@ -21,7 +21,7 @@ namespace TopDownShooterAIV
 
         public static void Init()
         {
-            Window = new Window(640, 360, "Top Down Shooter", true);
+            Window = new Window(640, 360, "Top Down Shooter", false);
             Window.SetResolution(320, 180);
             Window.SetVSync(false);
 

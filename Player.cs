@@ -13,7 +13,8 @@ namespace TopDownShooterAIV
         private float speed = 50f;
         private int frameDim = 24;
 
-        private float health = 5f;
+        private float initialHealth = 5f;
+        private float health;
 
         private bool damageGrace;
         private float damageGraceTime = 2f; // sec
@@ -33,6 +34,8 @@ namespace TopDownShooterAIV
             sprite.position = new Vector2(GameManager.Window.Width / 2, GameManager.Window.Height / 2);
 
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
+
+            health = initialHealth;
         }
 
         public override void Update()
@@ -99,6 +102,16 @@ namespace TopDownShooterAIV
             {
                 TakeDamage(1);
             }
+            if (collision.other is Medikit)
+            {
+                RestoreHealth(1);
+            }
+        }
+
+        private void RestoreHealth(float restore)
+        {
+            health = Math.Min(health + restore, initialHealth);
+            Console.WriteLine($"Current health: {health}");
         }
 
         private void TakeDamage(float damage)
