@@ -42,11 +42,6 @@ namespace TopDownShooterAIV
         {
             base.Update();
 
-            if (!Enabled)
-            {
-                return;
-            }
-
             Move();
 
             if (damageGrace)
@@ -63,11 +58,6 @@ namespace TopDownShooterAIV
         public override void Draw()
         {
             base.Draw();
-
-            if (!Enabled)
-            {
-                return;
-            }
 
             sprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
         }

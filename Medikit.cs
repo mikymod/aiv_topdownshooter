@@ -25,11 +25,6 @@ namespace TopDownShooterAIV
         {
             base.Draw();
 
-            if (!Enabled)
-            {
-                return;
-            }
-
             sprite.DrawTexture(texture, 0, 0, 16, 16);
         }
 

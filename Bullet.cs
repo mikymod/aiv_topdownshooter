@@ -34,22 +34,12 @@ namespace TopDownShooterAIV
         {
             base.Update();
 
-            if (!Enabled)
-            {
-                return;
-            }
-
             sprite.position += Direction * Speed * GameManager.Window.DeltaTime;
         }
 
         public override void Draw()
         {
             base.Draw();
-
-            if (!Enabled)
-            {
-                return;
-            }
 
             sprite.DrawTexture(texture, 0, 0, 16, 16);
         }

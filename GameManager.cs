@@ -33,12 +33,28 @@ namespace TopDownShooterAIV
         public static void Update()
         {
             CheckCollisions();
-            gameObjects.ForEach((obj) => obj.Update());
+            gameObjects.ForEach(
+                (obj) =>
+                {
+                    if (!obj.Enabled)
+                        return;
+
+                    obj.Update();
+                }
+            );
         }
 
         public static void Draw()
         {
-            gameObjects.ForEach((obj) => obj.Draw());
+            gameObjects.ForEach(
+                (obj) =>
+                {
+                    if (!obj.Enabled)
+                        return;
+
+                    obj.Draw();
+                }
+            );
         }
 
         public static void AddGameObject(GameObject go) => gameObjects.Add(go);
