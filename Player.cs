@@ -13,6 +13,12 @@ namespace TopDownShooterAIV
         private float speed = 50f;
         private int frameDim = 24;
 
+        private float health = 5f;
+
+        private bool damageGrace;
+        private float damageGraceTime = 2f; // sec
+        private float damageGraceTimer = 0f;
+
         public bool FacingRight
         {
             get => !sprite.FlipX;
@@ -33,12 +39,32 @@ namespace TopDownShooterAIV
         {
             base.Update();
 
+            if (!Enabled)
+            {
+                return;
+            }
+
             Move();
+
+            if (damageGrace)
+            {
+                damageGraceTimer += GameManager.Window.DeltaTime;
+                if (damageGraceTimer > damageGraceTime)
+                {
+                    damageGrace = false;
+                    damageGraceTimer = 0;
+                }
+            }
         }
 
         public override void Draw()
         {
             base.Draw();
+
+            if (!Enabled)
+            {
+                return;
+            }
 
             sprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
         }
@@ -62,6 +88,34 @@ namespace TopDownShooterAIV
             if (GameManager.Window.GetKey(KeyCode.S))
             {
                 sprite.position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
+            }
+        }
+
+        public override void OnCollide(Collision collision)
+        {
+            base.OnCollide(collision);
+
+            if (collision.other is Enemy)
+            {
+                TakeDamage(1);
+            }
+        }
+
+        private void TakeDamage(float damage)
+        {
+            if (damageGrace)
+            {
+                return;
+            }
+
+            Console.WriteLine("Damage Taken");
+
+            health -= damage;
+            damageGrace = true;
+
+            if (health <= 0)
+            {
+                Enabled = false;
             }
         }
     }

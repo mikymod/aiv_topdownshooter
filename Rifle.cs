@@ -48,6 +48,11 @@ namespace TopDownShooterAIV
         {
             base.Update();
 
+            if (!Enabled)
+            {
+                return;
+            }
+
             sprite.position = player.Position + new Vector2(offsetX, 0);
             var rifleDirection = RifleDirection();
             sprite.Rotation = (float)Math.Atan2(rifleDirection.Y, rifleDirection.X);
@@ -66,11 +71,21 @@ namespace TopDownShooterAIV
                     timer = 0;
                 }
             }
+
+            if (!player.Enabled)
+            {
+                Enabled = false;
+            }
         }
 
         public override void Draw()
         {
             base.Draw();
+
+            if (!Enabled)
+            {
+                return;
+            }
 
             sprite.DrawTexture(texture);
         }
