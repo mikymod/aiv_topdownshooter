@@ -19,6 +19,8 @@ namespace TopDownShooterAIV
         {
             this.rifle = rifle;
 
+            texture = new Texture("Assets/bullets.png");
+
             sprite = new Sprite(24, 24);
             sprite.position = rifle.Position;
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -49,7 +51,7 @@ namespace TopDownShooterAIV
                 return;
             }
 
-            sprite.DrawTexture(GameManager.Texture, 24 * 4, 24 * 3, 24, 24);
+            sprite.DrawTexture(texture, 0, 0, 16, 16);
         }
 
         public override void OnCollide(Collision collision)

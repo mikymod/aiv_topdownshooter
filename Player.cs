@@ -20,6 +20,7 @@ namespace TopDownShooterAIV
 
         public Player() : base()
         {
+            texture = new Texture("Assets/player.png");
 
             sprite = new Sprite(frameDim, frameDim);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -39,7 +40,7 @@ namespace TopDownShooterAIV
         {
             base.Draw();
 
-            sprite.DrawTexture(GameManager.Texture, 0, 0, frameDim, frameDim);
+            sprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
         }
 
         private void Move()

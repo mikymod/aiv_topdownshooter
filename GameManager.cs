@@ -12,7 +12,6 @@ namespace TopDownShooterAIV
     {
         public static Window Window { get; private set; }
         public static Camera Camera { get; private set; }
-        public static Texture Texture { get; private set; }
 
         public static float DeltaTime { get { return Window.DeltaTime; } }
 
@@ -29,8 +28,6 @@ namespace TopDownShooterAIV
             Camera = new Camera(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
             Camera.pivot = new Vector2(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
             Window.SetCamera(Camera);
-
-            Texture = new Texture("Assets/Player.png");
         }
 
         public static void Update()

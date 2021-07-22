@@ -28,6 +28,8 @@ namespace TopDownShooterAIV
         {
             this.player = player;
 
+            texture = new Texture("Assets/rifle.png");
+
             sprite = new Sprite(frameDim, frameDim);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
             sprite.position = player.Position;
@@ -70,7 +72,7 @@ namespace TopDownShooterAIV
         {
             base.Draw();
 
-            sprite.DrawTexture(GameManager.Texture, 24 * 5, 24 * 3, frameDim, frameDim);
+            sprite.DrawTexture(texture);
         }
 
         private Vector2 RifleDirection()
