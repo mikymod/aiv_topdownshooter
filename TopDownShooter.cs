@@ -11,7 +11,7 @@ namespace TopDownShooterAIV
 
             var player = new Player();
             var rifle = new Rifle(player);
-            var enemy = new Enemy();
+            var enemy = new Enemy(player);
             var medikit = new Medikit();
             var powerup = new PowerUp();
 

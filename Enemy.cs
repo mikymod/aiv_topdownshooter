@@ -10,10 +10,16 @@ namespace TopDownShooterAIV
 {
     class Enemy : GameObject
     {
+        private Player player;
+
         private float health = 5f;
 
-        public Enemy() : base()
+        private float speed = 50;
+
+        public Enemy(Player player) : base()
         {
+            this.player = player;
+
             texture = new Texture("Assets/enemy.png");
 
             sprite = new Sprite(24, 24);
@@ -21,6 +27,14 @@ namespace TopDownShooterAIV
             sprite.position = new Vector2(100, 100);
 
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            //Position = Vector2.Lerp(Position, player.Position, GameManager.Window.DeltaTime);
+            MoveTowardsPlayer();
         }
 
         public override void Draw()
@@ -52,6 +66,16 @@ namespace TopDownShooterAIV
             if (health <= 0)
             {
                 Enabled = false;
+            }
+        }
+
+        private void MoveTowardsPlayer()
+        {
+            var direction = (player.Position - Position).Normalized();
+            var distance = (player.Position - Position).LengthSquared;
+            if (distance > 0.1f)
+            {
+                Position += direction * speed * GameManager.DeltaTime;
             }
         }
     }
