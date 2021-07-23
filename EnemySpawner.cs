@@ -10,14 +10,14 @@ namespace TopDownShooterAIV
     class EnemySpawner
     {
         private Player player;
-        private List<Vector2> spawnPoints;
+        private List<SpawnPoint> spawnPoints;
         private List<Enemy> enemies;
 
         private float nextSpawnTime;
 
         private Random rand;
 
-        public EnemySpawner(int listSize, List<Vector2> spawnPoints, Player player)
+        public EnemySpawner(int listSize, List<SpawnPoint> spawnPoints, Player player)
         {
             this.spawnPoints = spawnPoints;
             this.player = player;
@@ -47,12 +47,12 @@ namespace TopDownShooterAIV
 
         private void SpawnEnemy()
         {
-            int spawnPointIndex = rand.Next(0, 2);
+            int spawnPointIndex = rand.Next(0, spawnPoints.Count);
             for (int i = 0; i < enemies.Count; i++)
             {
                 if (!enemies[i].Enabled)
                 {
-                    enemies[i].Position = spawnPoints[spawnPointIndex];
+                    enemies[i].Position = spawnPoints[spawnPointIndex].Position;
                     enemies[i].Enabled = true;
                     break;
                 }

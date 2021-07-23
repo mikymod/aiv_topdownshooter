@@ -17,18 +17,23 @@ namespace TopDownShooterAIV
             var medikit = new Medikit();
             var powerup = new PowerUp();
 
+            var spawnPoints = new List<SpawnPoint>()
+            {
+                new SpawnPoint(new Vector2(100, 100)),
+                new SpawnPoint(new Vector2(500, 100)),
+                new SpawnPoint(new Vector2(100, 300)),
+                new SpawnPoint(new Vector2(500, 300)),
+            };
+
             GameManager.AddGameObject(player);
             GameManager.AddGameObject(rifle);
             GameManager.AddGameObject(medikit);
             GameManager.AddGameObject(powerup);
 
-            var spawnPoints = new List<Vector2>()
+            for (int i = 0; i < spawnPoints.Count; i++)
             {
-                new Vector2(100, 100),
-                new Vector2(300, 100),
-                new Vector2(100, 300),
-                new Vector2(300, 300),
-            };
+                GameManager.AddGameObject(spawnPoints[i]);
+            }
 
             enemySpawner = new EnemySpawner(20, spawnPoints, player);
         }
