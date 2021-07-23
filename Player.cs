@@ -69,22 +69,36 @@ namespace TopDownShooterAIV
         {
             if (GameManager.Window.GetKey(KeyCode.D))
             {
-                sprite.position += new Vector2(1, 0) * speed * GameManager.Window.DeltaTime;
+                Position += new Vector2(1, 0) * speed * GameManager.Window.DeltaTime;
                 sprite.FlipX = false;
             }
             if (GameManager.Window.GetKey(KeyCode.A))
             {
-                sprite.position += new Vector2(-1, 0) * speed * GameManager.Window.DeltaTime;
+                Position += new Vector2(-1, 0) * speed * GameManager.Window.DeltaTime;
                 sprite.FlipX = true;
             }
             if (GameManager.Window.GetKey(KeyCode.W))
             {
-                sprite.position += new Vector2(0, -1) * speed * GameManager.Window.DeltaTime;
+                Position += new Vector2(0, -1) * speed * GameManager.Window.DeltaTime;
             }
             if (GameManager.Window.GetKey(KeyCode.S))
             {
-                sprite.position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
+                Position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
             }
+
+            CheckBounds();
+        }
+
+        private void CheckBounds()
+        {
+            if (Position.X < 0)
+                sprite.position.X = 0;
+            if (Position.X > GameManager.Window.Width)
+                sprite.position.X = GameManager.Window.Width;
+            if (Position.Y < 0)
+                sprite.position.Y = 0;
+            if (Position.Y > GameManager.Window.Height)
+                sprite.position.Y = GameManager.Window.Height;
         }
 
         public override void OnCollide(Collision collision)
