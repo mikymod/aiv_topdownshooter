@@ -10,7 +10,7 @@ namespace TopDownShooterAIV
 {
     class Enemy : GameObject
     {
-        private int health = 5;
+        private float health = 5f;
 
         public Enemy() : base()
         {
@@ -41,12 +41,17 @@ namespace TopDownShooterAIV
 
             if (collision.other is Bullet)
             {
-                Console.WriteLine("SBAM");
-                health--;
-                if (health <= 0)
-                {
-                    Enabled = false;
-                }
+                TakeDamage((Bullet)collision.other);
+            }
+        }
+
+        private void TakeDamage(Bullet bullet)
+        {
+            Console.WriteLine($"Damage Taken: {bullet.Damage}");
+            health -= bullet.Damage;
+            if (health <= 0)
+            {
+                Enabled = false;
             }
         }
     }

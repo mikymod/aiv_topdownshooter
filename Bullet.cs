@@ -10,14 +10,26 @@ namespace TopDownShooterAIV
 {
     class Bullet : GameObject
     {
-        private Rifle rifle;
+        public enum BulletType
+        {
+            Normal = 1,
+            Big = 2,
+        }
+
+        public Rifle Rifle { get; private set; }
 
         public Vector2 Direction { get; set; }
         public float Speed { get; set; }
 
+        public BulletType Type { get; set; }
+        private float damage = 1f;
+        private float damageMultiplier = 1f;
+
+        public float Damage { get => damage * damageMultiplier; }
+
         public Bullet(Rifle rifle) : base()
         {
-            this.rifle = rifle;
+            this.Rifle = rifle;
 
             texture = new Texture("Assets/bullets.png");
 
@@ -28,11 +40,15 @@ namespace TopDownShooterAIV
             Speed = 200;
 
             collider = new CircleCollider(this, 4);
+
+            Type = BulletType.Normal;
         }
 
         public override void Update()
         {
             base.Update();
+
+            EvaluateDamage();
 
             sprite.position += Direction * Speed * GameManager.Window.DeltaTime;
         }
@@ -41,7 +57,23 @@ namespace TopDownShooterAIV
         {
             base.Draw();
 
-            sprite.DrawTexture(texture, 0, 0, 16, 16);
+            int offsetX;
+            int offsetY;
+
+            switch (Type)
+            {
+                case BulletType.Big:
+                    offsetX = 16;
+                    offsetY = 0;
+                    break;
+                case BulletType.Normal:
+                default:
+                    offsetX = 0;
+                    offsetY = 0;
+                    break;
+            }
+
+            sprite.DrawTexture(texture, offsetX, offsetY, 16, 16);
         }
 
         public override void OnCollide(Collision collision)
@@ -53,5 +85,8 @@ namespace TopDownShooterAIV
                 Enabled = false;
             }
         }
+
+        // Very simple logic, just fo testing
+        public void EvaluateDamage() => damageMultiplier = (float)(Type);
     }
 }

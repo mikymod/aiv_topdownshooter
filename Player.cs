@@ -20,6 +20,9 @@ namespace TopDownShooterAIV
         private float damageGraceTime = 2f; // sec
         private float damageGraceTimer = 0f;
 
+        private List<PowerUp> powerUps = new List<PowerUp>();
+        public int PowerUpLevel { get => powerUps.Count; }
+
         public bool FacingRight
         {
             get => !sprite.FlipX;
@@ -96,7 +99,13 @@ namespace TopDownShooterAIV
             {
                 RestoreHealth(1);
             }
+            if (collision.other is PowerUp)
+            {
+                PickPowerUp((PowerUp)collision.other);
+            }
         }
+
+        private void PickPowerUp(PowerUp powerUp) => powerUps.Add(powerUp);
 
         private void RestoreHealth(float restore)
         {

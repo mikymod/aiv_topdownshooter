@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static TopDownShooterAIV.Bullet;
 
 namespace TopDownShooterAIV
 {
     class Rifle : GameObject
     {
-        private Player player;
+        public Player Player { get; private set; }
 
         private int frameDim = 24;
         private int offsetX = 8;
@@ -26,7 +27,7 @@ namespace TopDownShooterAIV
 
         public Rifle(Player player) : base()
         {
-            this.player = player;
+            this.Player = player;
 
             texture = new Texture("Assets/rifle.png");
 
@@ -48,7 +49,7 @@ namespace TopDownShooterAIV
         {
             base.Update();
 
-            sprite.position = player.Position + new Vector2(offsetX, 0);
+            sprite.position = Player.Position + new Vector2(offsetX, 0);
             var rifleDirection = RifleDirection();
             sprite.Rotation = (float)Math.Atan2(rifleDirection.Y, rifleDirection.X);
 
@@ -67,7 +68,7 @@ namespace TopDownShooterAIV
                 }
             }
 
-            if (!player.Enabled)
+            if (!Player.Enabled)
             {
                 Enabled = false;
             }
@@ -83,7 +84,7 @@ namespace TopDownShooterAIV
         private Vector2 RifleDirection()
         {
             var mouseAbsolutePos = GameManager.Window.MousePosition + GameManager.Window.CurrentCamera.position - GameManager.Window.CurrentCamera.pivot;
-            return (mouseAbsolutePos - player.Position).Normalized();
+            return (mouseAbsolutePos - Player.Position).Normalized();
         }
 
         private void Shoot()
@@ -93,6 +94,7 @@ namespace TopDownShooterAIV
             bullet.Enabled = true;
             bullet.Position = Position;
             bullet.Direction = direction;
+            bullet.Type = Player.PowerUpLevel > 0 ? Bullet.BulletType.Big : Bullet.BulletType.Normal;
 
             Console.WriteLine($"Fire {numShoot % maxNumBullet} Bullet. Total:{numShoot}");
 
