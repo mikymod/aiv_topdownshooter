@@ -52,6 +52,7 @@
     <Compile Include="BoxCollider.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="CircleCollider.cs" />
+    <Compile Include="EnemySpawner.cs" />
     <Compile Include="Medikit.cs" />
     <Compile Include="Collider.cs" />
     <Compile Include="Collision.cs" />

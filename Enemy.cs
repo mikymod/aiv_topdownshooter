@@ -24,16 +24,17 @@ namespace TopDownShooterAIV
 
             sprite = new Sprite(24, 24);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
-            sprite.position = new Vector2(100, 100);
+            //sprite.position = new Vector2(100, 100);
 
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
+
+            Enabled = false;
         }
 
         public override void Update()
         {
             base.Update();
 
-            //Position = Vector2.Lerp(Position, player.Position, GameManager.Window.DeltaTime);
             MoveTowardsPlayer();
         }
 
@@ -61,11 +62,10 @@ namespace TopDownShooterAIV
 
         private void TakeDamage(Bullet bullet)
         {
-            Console.WriteLine($"Damage Taken: {bullet.Damage}");
             health -= bullet.Damage;
             if (health <= 0)
             {
-                Enabled = false;
+                Disable();
             }
         }
 
@@ -77,6 +77,12 @@ namespace TopDownShooterAIV
             {
                 Position += direction * speed * GameManager.DeltaTime;
             }
+        }
+
+        private void Disable()
+        {
+            Enabled = false;
+            health = 5;
         }
     }
 }
