@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="AnimatedSprite.cs" />
+    <Compile Include="FSM\State.cs" />
+    <Compile Include="FSM\StateMachine.cs" />
     <Compile Include="GuiHealth.cs" />
     <Compile Include="Heart.cs" />
     <Compile Include="ItemSpawner.cs" />
