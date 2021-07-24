@@ -28,7 +28,7 @@ namespace TopDownShooterAIV
         {
             base.OnAnimationEnd();
 
-            owner.OnAnimationEnd();
+            //owner.OnAnimationEnd();
         }
     }
 }

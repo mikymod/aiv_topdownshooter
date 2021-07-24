@@ -5,17 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TopDownShooterAIV.FSM;
 
 namespace TopDownShooterAIV
 {
     class Player : GameObject
     {
-        enum PlayerState
-        {
-            Idle,
-            Run
-        }
-
         private float speed = 50f;
         private int frameDim = 24;
 
@@ -35,13 +30,14 @@ namespace TopDownShooterAIV
             get => !sprite.FlipX;
         }
 
-        PlayerState currentState;
-        Dictionary<PlayerState, AnimatedSprite> animatedSprites = new Dictionary<PlayerState, AnimatedSprite>();
-        AnimatedSprite currentAnimatedSprite;
+        public StateMachine StateMachine { get; }
+
+        private Vector2 velocity;
+        public Vector2 Velocity { get => velocity; set => velocity = value; }
 
         public Player() : base()
         {
-            texture = new Texture("Assets/player_idle.png");
+            //texture = new Texture("Assets/player_idle.png");
 
             sprite = new Sprite(frameDim, frameDim);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -51,44 +47,49 @@ namespace TopDownShooterAIV
 
             health = initialHealth;
 
-            currentState = PlayerState.Idle;
+            Velocity = Vector2.Zero;
 
-            // Sprites init
-            animatedSprites.Add(PlayerState.Idle, new AnimatedSprite(
-                sprite,
-                new Texture("Assets/player_idle.png"),
-                this, 4, frameDim, frameDim, 12, true
-            ));
-            animatedSprites.Add(PlayerState.Run, new AnimatedSprite(
-                sprite,
-                new Texture("Assets/player_run.png"),
-                this, 6, frameDim, frameDim, 12, true
-            ));
-
-            currentAnimatedSprite = animatedSprites[currentState];
-            currentAnimatedSprite.Play();
+            StateMachine = new StateMachine(this);
+            StateMachine.AddState(
+                "Idle",
+                new PlayerIdle(
+                    this,
+                    new AnimatedSprite(
+                        sprite,
+                        new Texture("Assets/player_idle.png"),
+                        this, 4, frameDim, frameDim, 12, true
+                    )
+                )
+            );
+            StateMachine.AddState(
+                "Run",
+                new PlayerRun(
+                    this,
+                    new AnimatedSprite(
+                        sprite,
+                        new Texture("Assets/player_run.png"),
+                        this, 6, frameDim, frameDim, 12, true
+                    )
+                )
+            );
+            StateMachine.SetInitialState("Idle");
         }
 
         public override void Update()
         {
             base.Update();
 
-            if (GameManager.Window.GetKey(KeyCode.D) || GameManager.Window.GetKey(KeyCode.A) || GameManager.Window.GetKey(KeyCode.W) || GameManager.Window.GetKey(KeyCode.S))
-            {
-                // FIXME: need FSM
-                currentState = PlayerState.Run;
-                currentAnimatedSprite = animatedSprites[currentState];
-                currentAnimatedSprite.Play();
-            }
-            else
-            {
-                // FIXME: need FSM
-                currentState = PlayerState.Idle;
-                currentAnimatedSprite = animatedSprites[currentState];
-                currentAnimatedSprite.Play();
-            }
+            StateMachine.Update();
 
-            Move();
+            //if (GameManager.Window.GetKey(KeyCode.D) || GameManager.Window.GetKey(KeyCode.A) || GameManager.Window.GetKey(KeyCode.W) || GameManager.Window.GetKey(KeyCode.S))
+            //{
+            //    StateMachine.ChangeState("Run");
+            //}
+            //else
+            //{
+            //    StateMachine.ChangeState("Idle");
+            //}
+
 
             if (damageGrace)
             {
@@ -99,38 +100,48 @@ namespace TopDownShooterAIV
                     damageGraceTimer = 0;
                 }
             }
-
-
-            currentAnimatedSprite.Update();
         }
 
         public override void Draw()
         {
             base.Draw();
 
-            currentAnimatedSprite.Draw();
+            StateMachine.Draw();
         }
 
-        private void Move()
+        public void Move()
         {
+            // Horizontal movement
             if (GameManager.Window.GetKey(KeyCode.D))
             {
-                Position += new Vector2(1, 0) * speed * GameManager.Window.DeltaTime;
+                velocity.X = speed;
                 sprite.FlipX = false;
             }
-            if (GameManager.Window.GetKey(KeyCode.A))
+            else if (GameManager.Window.GetKey(KeyCode.A))
             {
-                Position += new Vector2(-1, 0) * speed * GameManager.Window.DeltaTime;
+                velocity.X = -speed;
                 sprite.FlipX = true;
             }
+            else
+            {
+                velocity.Y = 0;
+            }
+            
+            // Vertical movement
             if (GameManager.Window.GetKey(KeyCode.W))
             {
-                Position += new Vector2(0, -1) * speed * GameManager.Window.DeltaTime;
+                velocity.Y = -speed;
             }
-            if (GameManager.Window.GetKey(KeyCode.S))
+            else if (GameManager.Window.GetKey(KeyCode.S))
             {
-                Position += new Vector2(0, 1) * speed * GameManager.Window.DeltaTime;
+                velocity.Y = speed;
             }
+            else
+            {
+                velocity.Y = 0;
+            }
+
+            Position += Velocity * GameManager.Window.DeltaTime;
 
             CheckBounds();
         }

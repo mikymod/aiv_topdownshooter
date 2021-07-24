@@ -10,18 +10,18 @@ namespace TopDownShooterAIV.FSM
     {
         public GameObject Owner { get; }
 
-        private Dictionary<String, State> states;
-        private State current;
+        private Dictionary<String, IState> states;
+        private IState current;
         private bool initialized;
 
         public StateMachine(GameObject owner)
         {
             this.Owner = owner;
-            states = new Dictionary<string, State>();
+            states = new Dictionary<string, IState>();
             initialized = false;
         }
 
-        public void AddState(String key, State state) => states[key] = state;
+        public void AddState(String key, IState state) => states[key] = state;
         
 
         public void ChangeState(String key)
@@ -33,8 +33,9 @@ namespace TopDownShooterAIV.FSM
 
         public void SetInitialState(String key)
         {
-            current = states[key];
             initialized = true;
+            current = states[key];
+            current.OnEnter();
         }
 
         public void Update()
@@ -45,6 +46,16 @@ namespace TopDownShooterAIV.FSM
             }
 
             current.OnLogic();
+        }
+
+        public void Draw()
+        {
+            if (!initialized)
+            {
+                return;
+            }
+
+            current.OnDraw();
         }
     }
 }
