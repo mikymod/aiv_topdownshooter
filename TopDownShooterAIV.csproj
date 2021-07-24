@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemSpawner.cs" />
     <Compile Include="SpawnPoint.cs" />
     <Compile Include="BoxCollider.cs" />
     <Compile Include="Bullet.cs" />

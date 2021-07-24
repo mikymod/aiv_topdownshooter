@@ -7,6 +7,7 @@ namespace TopDownShooterAIV
     class TopDownShooter
     {
         EnemySpawner enemySpawner;
+        private ItemSpawner itemSpawner;
 
         public TopDownShooter()
         {
@@ -14,8 +15,9 @@ namespace TopDownShooterAIV
 
             var player = new Player();
             var rifle = new Rifle(player);
-            var medikit = new Medikit();
-            var powerup = new PowerUp();
+
+            GameManager.AddGameObject(player);
+            GameManager.AddGameObject(rifle);
 
             var spawnPoints = new List<SpawnPoint>()
             {
@@ -24,18 +26,14 @@ namespace TopDownShooterAIV
                 new SpawnPoint(new Vector2(100, 300)),
                 new SpawnPoint(new Vector2(500, 300)),
             };
-
-            GameManager.AddGameObject(player);
-            GameManager.AddGameObject(rifle);
-            GameManager.AddGameObject(medikit);
-            GameManager.AddGameObject(powerup);
-
             for (int i = 0; i < spawnPoints.Count; i++)
             {
                 GameManager.AddGameObject(spawnPoints[i]);
             }
 
             enemySpawner = new EnemySpawner(20, spawnPoints, player);
+
+            itemSpawner = new ItemSpawner(20, player);
         }
 
         public void Run()
@@ -46,6 +44,8 @@ namespace TopDownShooterAIV
                 GameManager.Draw();
 
                 enemySpawner.Update();
+
+                itemSpawner.Update();
 
                 GameManager.Window.Update();
 

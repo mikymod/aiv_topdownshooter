@@ -16,9 +16,10 @@ namespace TopDownShooterAIV
 
             sprite = new Sprite(16, 16);
             sprite.pivot = new Vector2(16 / 2, 16 / 2);
-            sprite.position = new Vector2(500, 200);
 
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
+
+            Enabled = false;
         }
 
         public override void Update()
