@@ -10,6 +10,12 @@ namespace TopDownShooterAIV
 {
     class Player : GameObject
     {
+        enum PlayerState
+        {
+            Idle,
+            Run
+        }
+
         private float speed = 50f;
         private int frameDim = 24;
 
@@ -29,9 +35,13 @@ namespace TopDownShooterAIV
             get => !sprite.FlipX;
         }
 
+        PlayerState currentState;
+        Dictionary<PlayerState, AnimatedSprite> animatedSprites = new Dictionary<PlayerState, AnimatedSprite>();
+        AnimatedSprite currentAnimatedSprite;
+
         public Player() : base()
         {
-            texture = new Texture("Assets/player.png");
+            texture = new Texture("Assets/player_idle.png");
 
             sprite = new Sprite(frameDim, frameDim);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -40,11 +50,43 @@ namespace TopDownShooterAIV
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
 
             health = initialHealth;
+
+            currentState = PlayerState.Idle;
+
+            // Sprites init
+            animatedSprites.Add(PlayerState.Idle, new AnimatedSprite(
+                sprite,
+                new Texture("Assets/player_idle.png"),
+                this, 4, frameDim, frameDim, 12, true
+            ));
+            animatedSprites.Add(PlayerState.Run, new AnimatedSprite(
+                sprite,
+                new Texture("Assets/player_run.png"),
+                this, 6, frameDim, frameDim, 12, true
+            ));
+
+            currentAnimatedSprite = animatedSprites[currentState];
+            currentAnimatedSprite.Play();
         }
 
         public override void Update()
         {
             base.Update();
+
+            if (GameManager.Window.GetKey(KeyCode.D) || GameManager.Window.GetKey(KeyCode.A) || GameManager.Window.GetKey(KeyCode.W) || GameManager.Window.GetKey(KeyCode.S))
+            {
+                // FIXME: need FSM
+                currentState = PlayerState.Run;
+                currentAnimatedSprite = animatedSprites[currentState];
+                currentAnimatedSprite.Play();
+            }
+            else
+            {
+                // FIXME: need FSM
+                currentState = PlayerState.Idle;
+                currentAnimatedSprite = animatedSprites[currentState];
+                currentAnimatedSprite.Play();
+            }
 
             Move();
 
@@ -57,13 +99,16 @@ namespace TopDownShooterAIV
                     damageGraceTimer = 0;
                 }
             }
+
+
+            currentAnimatedSprite.Update();
         }
 
         public override void Draw()
         {
             base.Draw();
 
-            sprite.DrawTexture(texture, 0, 0, frameDim, frameDim);
+            currentAnimatedSprite.Draw();
         }
 
         private void Move()

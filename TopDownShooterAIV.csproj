@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation.cs" />
+    <Compile Include="AnimatedSprite.cs" />
     <Compile Include="GuiHealth.cs" />
     <Compile Include="Heart.cs" />
     <Compile Include="ItemSpawner.cs" />
@@ -88,7 +90,16 @@
     <Content Include="Assets\medikit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\player.png">
+    <Content Include="Assets\player_damage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\player_dead.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\player_idle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\player_run.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\powerup.png">
