@@ -34,6 +34,10 @@ namespace TopDownShooterAIV
             enemySpawner = new EnemySpawner(20, spawnPoints, player);
 
             itemSpawner = new ItemSpawner(20, player);
+
+            // GUI
+            GuiHealth guiHealth = new GuiHealth(player, new Vector2(20, 20));
+            GameManager.AddGameObject(guiHealth);
         }
 
         public void Run()

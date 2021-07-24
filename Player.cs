@@ -15,6 +15,7 @@ namespace TopDownShooterAIV
 
         private float initialHealth = 5f;
         private float health;
+        public float Health { get => health; }
 
         private bool damageGrace;
         private float damageGraceTime = 2f; // sec
