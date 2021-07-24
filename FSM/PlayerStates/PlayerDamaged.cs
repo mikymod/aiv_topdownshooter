@@ -1,20 +1,21 @@
-﻿using Aiv.Fast2D;
+﻿using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TopDownShooterAIV;
 using TopDownShooterAIV.FSM;
 
 namespace TopDownShooterAIV
 {
-    class PlayerIdle : IState
+    class PlayerDamaged : IState
     {
         private Player player;
         private AnimatedSprite sprite;
 
-        public PlayerIdle(Player player, AnimatedSprite sprite)
+        private float knockSpeed = 70f;
+
+        public PlayerDamaged(Player player, AnimatedSprite sprite)
         {
             this.player = player;
             this.sprite = sprite;
@@ -22,6 +23,7 @@ namespace TopDownShooterAIV
 
         public void OnAnimationEnd()
         {
+            player.StateMachine.ChangeState("Idle");
         }
 
         public void OnDraw()
@@ -31,7 +33,9 @@ namespace TopDownShooterAIV
 
         public void OnEnter()
         {
-            sprite.Play();
+            sprite.Restart();
+
+            player.Velocity = player.KnockDirection * knockSpeed;
         }
 
         public void OnExit()
@@ -43,10 +47,7 @@ namespace TopDownShooterAIV
         {
             sprite.Update();
 
-            if (GameManager.Window.GetKey(KeyCode.D) || GameManager.Window.GetKey(KeyCode.A) || GameManager.Window.GetKey(KeyCode.W) || GameManager.Window.GetKey(KeyCode.S))
-            {
-                player.StateMachine.ChangeState("Run");
-            }
+            player.Position += player.Velocity * GameManager.DeltaTime;
         }
     }
 }

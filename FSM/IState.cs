@@ -12,5 +12,6 @@ namespace TopDownShooterAIV.FSM
         void OnLogic();
         void OnDraw();
         void OnExit();
+        void OnAnimationEnd();
     }
 }

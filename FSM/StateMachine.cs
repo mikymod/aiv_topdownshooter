@@ -57,5 +57,10 @@ namespace TopDownShooterAIV.FSM
 
             current.OnDraw();
         }
+
+        public void OnAnimationEnd()
+        {
+            current?.OnAnimationEnd();
+        }
     }
 }

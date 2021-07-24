@@ -35,6 +35,8 @@ namespace TopDownShooterAIV
         private Vector2 velocity;
         public Vector2 Velocity { get => velocity; set => velocity = value; }
 
+        public Vector2 KnockDirection { get; private set; }
+
         public Player() : base()
         {
             //texture = new Texture("Assets/player_idle.png");
@@ -72,6 +74,19 @@ namespace TopDownShooterAIV
                     )
                 )
             );
+
+            StateMachine.AddState(
+                "Damaged",
+                new PlayerDamaged(
+                    this,
+                    new AnimatedSprite(
+                        sprite,
+                        new Texture("Assets/player_damaged.png"),
+                        this, 2, frameDim, frameDim, 6, false
+                    )
+                )
+            );
+
             StateMachine.SetInitialState("Idle");
         }
 
@@ -80,16 +95,6 @@ namespace TopDownShooterAIV
             base.Update();
 
             StateMachine.Update();
-
-            //if (GameManager.Window.GetKey(KeyCode.D) || GameManager.Window.GetKey(KeyCode.A) || GameManager.Window.GetKey(KeyCode.W) || GameManager.Window.GetKey(KeyCode.S))
-            //{
-            //    StateMachine.ChangeState("Run");
-            //}
-            //else
-            //{
-            //    StateMachine.ChangeState("Idle");
-            //}
-
 
             if (damageGrace)
             {
@@ -164,6 +169,7 @@ namespace TopDownShooterAIV
 
             if (collision.other is Enemy)
             {
+                KnockDirection = (Position - collision.other.Position).Normalized();
                 TakeDamage(1);
             }
             if (collision.other is Medikit)
@@ -195,11 +201,19 @@ namespace TopDownShooterAIV
 
             health -= damage;
             damageGrace = true;
+            StateMachine.ChangeState("Damaged");
 
             if (health <= 0)
             {
                 Enabled = false;
             }
+        }
+
+        public override void OnAnimationEnd()
+        {
+            base.OnAnimationEnd();
+
+            StateMachine.OnAnimationEnd();
         }
     }
 }

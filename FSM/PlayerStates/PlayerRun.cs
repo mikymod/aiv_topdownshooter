@@ -19,6 +19,10 @@ namespace TopDownShooterAIV
             this.sprite = sprite;
         }
 
+        public void OnAnimationEnd()
+        {
+        }
+
         public void OnDraw()
         {
             sprite.Draw();

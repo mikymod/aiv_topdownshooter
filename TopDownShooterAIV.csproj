@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="AnimatedSprite.cs" />
+    <Compile Include="FSM\PlayerStates\PlayerDamaged.cs" />
     <Compile Include="FSM\PlayerStates\PlayerIdle.cs" />
     <Compile Include="FSM\PlayerStates\PlayerRun.cs" />
     <Compile Include="FSM\IState.cs" />
@@ -92,6 +93,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\medikit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\player_damaged.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\player_dead.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\player_idle.png">

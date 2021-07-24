@@ -47,5 +47,10 @@ namespace TopDownShooterAIV
         {
             //Console.WriteLine($"{collision.collider} collides with {collision.other}");
         }
+
+        public virtual void OnAnimationEnd()
+        {
+
+        }
     }
 }
