@@ -105,6 +105,10 @@ namespace TopDownShooterAIV
                     damageGraceTimer = 0;
                 }
             }
+
+            Position += Velocity * GameManager.Window.DeltaTime;
+
+            CheckBounds();
         }
 
         public override void Draw()
@@ -145,10 +149,6 @@ namespace TopDownShooterAIV
             {
                 velocity.Y = 0;
             }
-
-            Position += Velocity * GameManager.Window.DeltaTime;
-
-            CheckBounds();
         }
 
         private void CheckBounds()

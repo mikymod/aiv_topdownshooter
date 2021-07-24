@@ -1,4 +1,5 @@
 ﻿using Aiv.Fast2D;
+using OpenTK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace TopDownShooterAIV
         public void OnEnter()
         {
             sprite.Play();
+
+            player.Velocity = Vector2.Zero;
         }
 
         public void OnExit()

@@ -41,6 +41,8 @@ namespace TopDownShooterAIV
         public void OnExit()
         {
             sprite.Stop();
+
+            player.Velocity = Vector2.Zero;
         }
 
         public void OnLogic()
