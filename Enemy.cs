@@ -16,6 +16,8 @@ namespace TopDownShooterAIV
 
         private float speed = 50;
 
+        private AnimatedSprite animatedSprite;
+
         public Enemy(Player player) : base()
         {
             this.player = player;
@@ -29,6 +31,9 @@ namespace TopDownShooterAIV
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
 
             Enabled = false;
+
+            animatedSprite = new AnimatedSprite(sprite, texture, this, 6, 24, 24, 12);
+            animatedSprite.Play();
         }
 
         public override void Update()
@@ -36,6 +41,8 @@ namespace TopDownShooterAIV
             base.Update();
 
             MoveTowardsPlayer();
+
+            animatedSprite.Update();
         }
 
         public override void Draw()
@@ -47,7 +54,8 @@ namespace TopDownShooterAIV
                 return;
             }
 
-            sprite.DrawTexture(texture, 0, 0, 24, 24);
+            //sprite.DrawTexture(texture, 0, 0, 24, 24);
+            animatedSprite.Draw();
         }
 
         public override void OnCollide(Collision collision)
@@ -76,6 +84,7 @@ namespace TopDownShooterAIV
             if (distance > 0.1f)
             {
                 Position += direction * speed * GameManager.DeltaTime;
+                sprite.FlipX = Math.Sign(direction.X) == -1;
             }
         }
 
