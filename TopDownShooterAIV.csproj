@@ -52,6 +52,7 @@
     <Compile Include="Animation.cs" />
     <Compile Include="AnimatedSprite.cs" />
     <Compile Include="FSM\PlayerStates\PlayerDamaged.cs" />
+    <Compile Include="FSM\PlayerStates\PlayerDead.cs" />
     <Compile Include="FSM\PlayerStates\PlayerIdle.cs" />
     <Compile Include="FSM\PlayerStates\PlayerRun.cs" />
     <Compile Include="FSM\IState.cs" />

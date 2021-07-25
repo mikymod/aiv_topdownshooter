@@ -86,6 +86,17 @@ namespace TopDownShooterAIV
                     )
                 )
             );
+            StateMachine.AddState(
+                "Dead",
+                new PlayerDead(
+                    this,
+                    new AnimatedSprite(
+                        sprite,
+                        new Texture("Assets/player_dead.png"),
+                        this, 3, frameDim, frameDim, 6, false
+                    )
+                )
+            );
 
             StateMachine.SetInitialState("Idle");
         }
@@ -201,11 +212,14 @@ namespace TopDownShooterAIV
 
             health -= damage;
             damageGrace = true;
-            StateMachine.ChangeState("Damaged");
 
             if (health <= 0)
             {
-                Enabled = false;
+                StateMachine.ChangeState("Dead");
+            }
+            else
+            {
+                StateMachine.ChangeState("Damaged");
             }
         }
 
