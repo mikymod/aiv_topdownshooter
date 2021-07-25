@@ -38,6 +38,11 @@ namespace TopDownShooterAIV
             // GUI
             GuiHealth guiHealth = new GuiHealth(player, new Vector2(20, 20));
             GameManager.AddGameObject(guiHealth);
+
+            // Follow Camera
+            GameManager.Camera = new FollowCamera(GameManager.Window.OrthoWidth * 0.5f, GameManager.Window.OrthoHeight * 0.5f, player);
+            GameManager.Camera.pivot = new Vector2(GameManager.Window.OrthoWidth * 0.5f, GameManager.Window.OrthoHeight * 0.5f);
+            GameManager.Window.SetCamera(GameManager.Camera);
         }
 
         public void Run()
@@ -50,6 +55,8 @@ namespace TopDownShooterAIV
                 enemySpawner.Update();
 
                 itemSpawner.Update();
+
+                ((FollowCamera)(GameManager.Camera)).Update();
 
                 GameManager.Window.Update();
 

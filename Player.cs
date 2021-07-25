@@ -166,12 +166,12 @@ namespace TopDownShooterAIV
         {
             if (Position.X < 0)
                 sprite.position.X = 0;
-            if (Position.X > GameManager.Window.Width)
-                sprite.position.X = GameManager.Window.Width;
+            if (Position.X > GameManager.Window.Width * 2)
+                sprite.position.X = GameManager.Window.Width * 2;
             if (Position.Y < 0)
                 sprite.position.Y = 0;
-            if (Position.Y > GameManager.Window.Height)
-                sprite.position.Y = GameManager.Window.Height;
+            if (Position.Y > GameManager.Window.Height * 2)
+                sprite.position.Y = GameManager.Window.Height * 2;
         }
 
         public override void OnCollide(Collision collision)

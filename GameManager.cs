@@ -11,7 +11,7 @@ namespace TopDownShooterAIV
     public static class GameManager
     {
         public static Window Window { get; private set; }
-        public static Camera Camera { get; private set; }
+        public static Camera Camera { get; set; }
         public static Camera GuiCamera { get; private set; }
 
         public static float DeltaTime { get { return Window.DeltaTime; } }
@@ -27,9 +27,9 @@ namespace TopDownShooterAIV
             Window.SetResolution(320, 180);
             Window.SetVSync(false);
 
-            Camera = new Camera(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
-            Camera.pivot = new Vector2(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
-            Window.SetCamera(Camera);
+            //Camera = new FollowCamera(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
+            //Camera.pivot = new Vector2(Window.OrthoWidth * 0.5f, Window.OrthoHeight * 0.5f);
+            //Window.SetCamera(Camera);
 
             GuiCamera = new Camera();
         }
