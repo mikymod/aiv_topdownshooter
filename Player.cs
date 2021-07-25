@@ -23,7 +23,10 @@ namespace TopDownShooterAIV
         private float damageGraceTimer = 0f;
 
         private List<PowerUp> powerUps = new List<PowerUp>();
-        public int PowerUpLevel { get => powerUps.Count; }
+        private float powerUpTimer = 0;
+        private bool poweredUp;
+        private float powerUpTime;
+        public bool PoweredUp { get => poweredUp; }
 
         public bool FacingRight
         {
@@ -117,6 +120,16 @@ namespace TopDownShooterAIV
                 }
             }
 
+            if (poweredUp)
+            {
+                powerUpTimer += GameManager.DeltaTime;
+                if (powerUpTimer > powerUpTime)
+                {
+                    poweredUp = false;
+                    powerUpTimer = 0;
+                }
+            }
+
             Position += Velocity * GameManager.Window.DeltaTime;
 
             CheckBounds();
@@ -193,7 +206,13 @@ namespace TopDownShooterAIV
             }
         }
 
-        private void PickPowerUp(PowerUp powerUp) => powerUps.Add(powerUp);
+        private void PickPowerUp(PowerUp powerUp)
+        {
+            powerUps.Add(powerUp);
+
+            poweredUp = true;
+            powerUpTime = powerUp.BuffTime;
+        }
 
         private void RestoreHealth(float restore)
         {

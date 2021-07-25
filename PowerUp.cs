@@ -10,6 +10,9 @@ namespace TopDownShooterAIV
 {
     class PowerUp : GameObject
     {
+        private float buffTime = 10f;
+        public float BuffTime { get => buffTime; }
+
         public PowerUp()
         {
             texture = new Texture("Assets/powerup.png");

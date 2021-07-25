@@ -94,7 +94,7 @@ namespace TopDownShooterAIV
             bullet.Enabled = true;
             bullet.Position = Position;
             bullet.Direction = direction;
-            bullet.Type = Player.PowerUpLevel > 0 ? Bullet.BulletType.Big : Bullet.BulletType.Normal;
+            bullet.Type = Player.PoweredUp ? Bullet.BulletType.Big : Bullet.BulletType.Normal;
 
             Console.WriteLine($"Fire {numShoot % maxNumBullet} Bullet. Total:{numShoot}");
 
