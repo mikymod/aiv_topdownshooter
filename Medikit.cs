@@ -10,6 +10,7 @@ namespace TopDownShooterAIV
 {
     public class Medikit : GameObject
     {
+        AnimatedSprite animatedSprite;
         public Medikit()
         {
             texture = new Texture("Assets/medikit.png");
@@ -20,13 +21,23 @@ namespace TopDownShooterAIV
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
 
             Enabled = false;
+
+            animatedSprite = new AnimatedSprite(sprite, texture, this, 7, 16, 15, 12, false);
+            animatedSprite.Play();
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+            animatedSprite.Update();
+        }
         public override void Draw()
         {
             base.Draw();
 
-            sprite.DrawTexture(texture, 0, 0, 16, 16);
+            //sprite.DrawTexture(texture, 0, 0, 16, 16);
+            animatedSprite.Draw();
         }
 
         public override void OnCollide(Collision collision)

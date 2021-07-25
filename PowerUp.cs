@@ -11,6 +11,8 @@ namespace TopDownShooterAIV
     class PowerUp : GameObject
     {
         private float buffTime = 10f;
+        private AnimatedSprite animatedSprite;
+
         public float BuffTime { get => buffTime; }
 
         public PowerUp()
@@ -23,18 +25,24 @@ namespace TopDownShooterAIV
             collider = new BoxCollider(this, sprite.Width, sprite.Height);
 
             Enabled = false;
+
+            animatedSprite = new AnimatedSprite(sprite, texture, this, 7, 16, 16, 12, false);
+            animatedSprite.Play();
         }
 
         public override void Update()
         {
             base.Update();
+
+            animatedSprite.Update();
         }
 
         public override void Draw()
         {
             base.Draw();
 
-            sprite.DrawTexture(texture, 0, 0, 16, 16);
+            //sprite.DrawTexture(texture, 0, 0, 16, 16);
+            animatedSprite.Draw();
         }
 
         public override void OnCollide(Collision collision)
