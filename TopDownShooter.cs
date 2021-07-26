@@ -27,17 +27,22 @@ namespace TopDownShooterAIV
 
             var spawnPoints = new List<SpawnPoint>()
             {
+                // TODO: avoid magic values
                 new SpawnPoint(new Vector2(100, 100)),
-                new SpawnPoint(new Vector2(500, 100)),
-                new SpawnPoint(new Vector2(100, 300)),
-                new SpawnPoint(new Vector2(500, 300)),
+                new SpawnPoint(new Vector2(640, 100)),
+                new SpawnPoint(new Vector2(1180, 100)),
+                new SpawnPoint(new Vector2(100, 360)),
+                new SpawnPoint(new Vector2(1180, 360)),
+                new SpawnPoint(new Vector2(100, 620)),
+                new SpawnPoint(new Vector2(640, 620)),
+                new SpawnPoint(new Vector2(1180, 620)),
             };
             for (int i = 0; i < spawnPoints.Count; i++)
             {
                 GameManager.AddGameObject(spawnPoints[i]);
             }
 
-            enemySpawner = new EnemySpawner(20, spawnPoints, player);
+            enemySpawner = new EnemySpawner(40, spawnPoints, player);
             itemSpawner = new ItemSpawner(20, player);
 
             Player.OnPlayerDeath += enemySpawner.Disable;

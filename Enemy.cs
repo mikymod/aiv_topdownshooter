@@ -14,7 +14,7 @@ namespace TopDownShooterAIV
 
         private float health = 5f;
 
-        private float speed = 50;
+        private float speed = 80f;
 
         private AnimatedSprite animatedSprite;
 

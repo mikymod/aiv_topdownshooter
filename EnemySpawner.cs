@@ -33,7 +33,7 @@ namespace TopDownShooterAIV
 
             rand = new Random(); 
 
-            nextSpawnTime = (float)(rand.NextDouble() * 2 + 2);
+            nextSpawnTime = (float)(rand.NextDouble() * 2 + 1);
 
             enabled = true;
         }
@@ -49,7 +49,7 @@ namespace TopDownShooterAIV
             if (nextSpawnTime <= 0)
             {
                 SpawnEnemy();
-                nextSpawnTime = (float)(rand.NextDouble() * 2 + 2);
+                nextSpawnTime = (float)(rand.NextDouble() * 2 + 1);
             }
         }
 
