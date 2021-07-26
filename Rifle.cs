@@ -26,7 +26,6 @@ namespace TopDownShooterAIV
         private float timer = 0;
         private bool shooted;
 
-        AudioClip clip;
         SoundEffect shootSFX;
 
         public Rifle(Player player) : base()
@@ -48,8 +47,7 @@ namespace TopDownShooterAIV
                 GameManager.AddGameObject(bullet);
             }
 
-            clip = AssetsManager.GetClip("rifle_shot");
-            shootSFX = new SoundEffect(clip);
+            shootSFX = new SoundEffect(AssetsManager.GetClip("rifle_shot"));
         }
 
         public override void Update()
@@ -109,7 +107,7 @@ namespace TopDownShooterAIV
 
             shooted = true;
 
-            shootSFX.Play(0.3f);
+            shootSFX.Play(Player.PoweredUp ? 0.35f : 0.2f);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace TopDownShooterAIV
 
             Player.OnPlayerDeath += enemySpawner.Disable;
             Player.OnPlayerDeath += itemSpawner.Disable;
-
+            Player.OnPlayerDeath += () => rifle.Enabled = false;
 
             // GUI
             GuiHealth guiHealth = new GuiHealth(player, new Vector2(20, 20));
