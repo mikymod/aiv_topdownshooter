@@ -11,7 +11,7 @@ namespace TopDownShooterAIV
 {
     class Player : GameObject
     {
-        private float speed = 50f;
+        private float speed = 90f;
         private int frameDim = 24;
 
         private float initialHealth = 5f;
@@ -146,35 +146,13 @@ namespace TopDownShooterAIV
 
         public void Move()
         {
-            // Horizontal movement
-            if (GameManager.Window.GetKey(KeyCode.D))
-            {
-                velocity.X = speed;
-                sprite.FlipX = false;
-            }
-            else if (GameManager.Window.GetKey(KeyCode.A))
-            {
-                velocity.X = -speed;
-                sprite.FlipX = true;
-            }
-            else
-            {
-                velocity.Y = 0;
-            }
-            
-            // Vertical movement
-            if (GameManager.Window.GetKey(KeyCode.W))
-            {
-                velocity.Y = -speed;
-            }
-            else if (GameManager.Window.GetKey(KeyCode.S))
-            {
-                velocity.Y = speed;
-            }
-            else
-            {
-                velocity.Y = 0;
-            }
+            var axisX = Convert.ToInt32(GameManager.Window.GetKey(KeyCode.D)) - Convert.ToInt32(GameManager.Window.GetKey(KeyCode.A));
+            var axisY = Convert.ToInt32(GameManager.Window.GetKey(KeyCode.S)) - Convert.ToInt32(GameManager.Window.GetKey(KeyCode.W));
+            var angle = Math.Atan2(axisY, axisX);
+            var direction = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
+            velocity = direction * speed;
+
+            sprite.FlipX = velocity.X < 0;
         }
 
         private void CheckBounds()
