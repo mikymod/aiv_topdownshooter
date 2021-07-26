@@ -240,6 +240,8 @@ namespace TopDownShooterAIV
             {
                 StateMachine.ChangeState("Damaged");
             }
+
+            ((FollowCamera)(GameManager.Camera)).StartEarthQuake();
         }
 
         public override void OnAnimationEnd()
