@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace TopDownShooterAIV
     {
         private Player player;
         private AnimatedSprite sprite;
+
+        private float knockSpeed = 90f;
 
         private SoundEffect deathSFX;
 
@@ -26,6 +29,8 @@ namespace TopDownShooterAIV
         {
             // end game
             Console.WriteLine("Dead");
+
+            player.Velocity = Vector2.Zero;
         }
 
         public void OnDraw()
@@ -36,7 +41,10 @@ namespace TopDownShooterAIV
         public void OnEnter()
         {
             sprite.Play();
+
             deathSFX.Play(0.2f);
+
+            player.Velocity = player.KnockDirection * knockSpeed;
         }
 
         public void OnExit()
