@@ -22,7 +22,7 @@ namespace TopDownShooterAIV
         {
             this.player = player;
 
-            texture = new Texture("Assets/enemy.png");
+            texture = AssetsManager.GetTexture("enemy");
 
             sprite = new Sprite(24, 24);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);

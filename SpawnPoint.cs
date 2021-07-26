@@ -12,7 +12,7 @@ namespace TopDownShooterAIV
     {
         public SpawnPoint(Vector2 position)
         {
-            texture = new Texture("Assets/spawn_points.png");
+            texture = AssetsManager.GetTexture("spawn_points");
 
             sprite = new Sprite(texture.Width, texture.Height);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);

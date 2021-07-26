@@ -13,7 +13,7 @@ namespace TopDownShooterAIV
         AnimatedSprite animatedSprite;
         public Medikit()
         {
-            texture = new Texture("Assets/medikit.png");
+            texture = AssetsManager.GetTexture("medikit");
 
             sprite = new Sprite(16, 16);
             sprite.pivot = new Vector2(16 / 2, 16 / 2);

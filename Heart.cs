@@ -9,7 +9,7 @@ namespace TopDownShooterAIV
 
         public Heart()
         {
-            texture = new Texture("Assets/gui/heart.png");
+            texture = AssetsManager.GetTexture("heart");
 
             sprite = new Sprite(16, 16);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);

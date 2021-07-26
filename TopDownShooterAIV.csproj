@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="AnimatedSprite.cs" />
+    <Compile Include="AssetsManager.cs" />
     <Compile Include="BackGround.cs" />
     <Compile Include="FollowCamera.cs" />
     <Compile Include="FSM\PlayerStates\PlayerDamaged.cs" />

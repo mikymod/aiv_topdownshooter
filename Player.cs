@@ -61,7 +61,7 @@ namespace TopDownShooterAIV
                     this,
                     new AnimatedSprite(
                         sprite,
-                        new Texture("Assets/player_idle.png"),
+                        AssetsManager.GetTexture("player_idle"),
                         this, 4, frameDim, frameDim, 12, true
                     )
                 )
@@ -72,7 +72,7 @@ namespace TopDownShooterAIV
                     this,
                     new AnimatedSprite(
                         sprite,
-                        new Texture("Assets/player_run.png"),
+                        AssetsManager.GetTexture("player_run"),
                         this, 6, frameDim, frameDim, 12, true
                     )
                 )
@@ -84,7 +84,7 @@ namespace TopDownShooterAIV
                     this,
                     new AnimatedSprite(
                         sprite,
-                        new Texture("Assets/player_damaged.png"),
+                        AssetsManager.GetTexture("player_damaged"),
                         this, 2, frameDim, frameDim, 6, false
                     )
                 )
@@ -95,7 +95,7 @@ namespace TopDownShooterAIV
                     this,
                     new AnimatedSprite(
                         sprite,
-                        new Texture("Assets/player_dead.png"),
+                        AssetsManager.GetTexture("player_dead"),
                         this, 3, frameDim, frameDim, 6, false
                     )
                 )

@@ -33,7 +33,7 @@ namespace TopDownShooterAIV
         {
             this.Player = player;
 
-            texture = new Texture("Assets/rifle.png");
+            texture = AssetsManager.GetTexture("rifle");
 
             sprite = new Sprite(frameDim, frameDim);
             sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -48,7 +48,7 @@ namespace TopDownShooterAIV
                 GameManager.AddGameObject(bullet);
             }
 
-            clip = new AudioClip("Assets/shot.wav");
+            clip = AssetsManager.GetClip("rifle_shot");
             shootSFX = new SoundEffect(clip);
         }
 

@@ -17,7 +17,7 @@ namespace TopDownShooterAIV
 
         public PowerUp()
         {
-            texture = new Texture("Assets/powerup.png");
+            texture = AssetsManager.GetTexture("powerup");
 
             sprite = new Sprite(16, 16);
             sprite.pivot = new Vector2(16 / 2, 16 / 2);

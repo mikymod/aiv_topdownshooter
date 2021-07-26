@@ -31,7 +31,7 @@ namespace TopDownShooterAIV
         {
             this.Rifle = rifle;
 
-            texture = new Texture("Assets/bullets.png");
+            texture = AssetsManager.GetTexture("bullet");
 
             sprite = new Sprite(24, 24);
             sprite.position = rifle.Position;

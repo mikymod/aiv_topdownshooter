@@ -13,6 +13,9 @@ namespace TopDownShooterAIV
         {
             GameManager.Init();
 
+            AssetsManager.Init();
+            LoadAssets();
+
             var background = new BackGround();
             GameManager.AddGameObject(background);
 
@@ -68,6 +71,24 @@ namespace TopDownShooterAIV
                     break;
                 }
             }
+        }
+
+        private void LoadAssets()
+        {
+            AssetsManager.AddTexture("background", "Assets/background.png");
+            AssetsManager.AddTexture("bullet", "Assets/bullets.png");
+            AssetsManager.AddTexture("enemy", "Assets/enemy.png");
+            AssetsManager.AddTexture("medikit", "Assets/medikit.png");
+            AssetsManager.AddTexture("player_damaged", "Assets/player_damaged.png");
+            AssetsManager.AddTexture("player_dead", "Assets/player_dead.png");
+            AssetsManager.AddTexture("player_idle", "Assets/player_idle.png");
+            AssetsManager.AddTexture("player_run", "Assets/player_run.png");
+            AssetsManager.AddTexture("powerup", "Assets/powerup.png");
+            AssetsManager.AddTexture("rifle", "Assets/rifle.png");
+            AssetsManager.AddTexture("spawn_points", "Assets/spawn_points.png");
+            AssetsManager.AddTexture("heart", "Assets/gui/heart.png");
+
+            AssetsManager.AddClip("rifle_shot", "Assets/shot.wav");
         }
     }
 }

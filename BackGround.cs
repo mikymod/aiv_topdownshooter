@@ -12,7 +12,7 @@ namespace TopDownShooterAIV
     {
         public BackGround()
         {
-            texture = new Texture("Assets/background.png");
+            texture = AssetsManager.GetTexture("background");
 
             sprite = new Sprite(texture.Width, texture.Height);
             //sprite.pivot = new Vector2(sprite.Width / 2, sprite.Height / 2);
