@@ -15,10 +15,15 @@ namespace TopDownShooterAIV
 
         private float knockSpeed = 70f;
 
+        SoundEffect hurtSFX;
+
+
         public PlayerDamaged(Player player, AnimatedSprite sprite)
         {
             this.player = player;
             this.sprite = sprite;
+
+            hurtSFX = new SoundEffect(AssetsManager.GetClip("player_hurt"));
         }
 
         public void OnAnimationEnd()
@@ -36,6 +41,8 @@ namespace TopDownShooterAIV
             sprite.Restart();
 
             player.Velocity = player.KnockDirection * knockSpeed;
+
+            hurtSFX.Play(0.2f);
         }
 
         public void OnExit()

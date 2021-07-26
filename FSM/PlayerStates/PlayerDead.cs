@@ -12,10 +12,14 @@ namespace TopDownShooterAIV
         private Player player;
         private AnimatedSprite sprite;
 
+        private SoundEffect deathSFX;
+
         public PlayerDead(Player player, AnimatedSprite sprite)
         {
             this.player = player;
             this.sprite = sprite;
+
+            deathSFX = new SoundEffect(AssetsManager.GetClip("player_death"));
         }
 
         public void OnAnimationEnd()
@@ -32,6 +36,7 @@ namespace TopDownShooterAIV
         public void OnEnter()
         {
             sprite.Play();
+            deathSFX.Play(0.2f);
         }
 
         public void OnExit()

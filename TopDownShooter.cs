@@ -93,6 +93,8 @@ namespace TopDownShooterAIV
             AssetsManager.AddClip("item_spawn", "Assets/item_spawn.wav");
             AssetsManager.AddClip("powerup_pickup", "Assets/powerup_pickup.wav");
             AssetsManager.AddClip("medikit_pickup", "Assets/medikit_pickup.wav");
+            AssetsManager.AddClip("player_hurt", "Assets/player_hurt.wav");
+            AssetsManager.AddClip("player_death", "Assets/player_death.wav");
         }
     }
 }
