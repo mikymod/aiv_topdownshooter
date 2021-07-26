@@ -18,6 +18,8 @@ namespace TopDownShooterAIV
 
         private AnimatedSprite animatedSprite;
 
+        private SoundEffect hurtSFX;
+
         public Enemy(Player player) : base()
         {
             this.player = player;
@@ -34,6 +36,8 @@ namespace TopDownShooterAIV
 
             animatedSprite = new AnimatedSprite(sprite, texture, this, 6, 24, 24, 12);
             animatedSprite.Play();
+
+            hurtSFX = new SoundEffect(AssetsManager.GetClip("enemy_hurt"));
         }
 
         public override void Update()
@@ -70,6 +74,8 @@ namespace TopDownShooterAIV
 
         private void TakeDamage(Bullet bullet)
         {
+            hurtSFX.Play(0.1f);
+
             health -= bullet.Damage;
             if (health <= 0)
             {

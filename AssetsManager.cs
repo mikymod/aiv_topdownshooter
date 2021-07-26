@@ -21,7 +21,7 @@ namespace TopDownShooterAIV
 
         public static AudioClip AddClip(string name, string path)
         {
-            AudioClip c = new AudioClip(path);
+             AudioClip c = new AudioClip(path);
             if (c != null)
             {
                 clips[name] = c;

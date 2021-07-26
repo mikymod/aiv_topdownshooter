@@ -11,6 +11,9 @@ namespace TopDownShooterAIV
     public class Medikit : GameObject
     {
         AnimatedSprite animatedSprite;
+
+        SoundEffect healSFX;
+
         public Medikit()
         {
             texture = AssetsManager.GetTexture("medikit");
@@ -24,6 +27,8 @@ namespace TopDownShooterAIV
 
             animatedSprite = new AnimatedSprite(sprite, texture, this, 7, 16, 15, 12, false);
             animatedSprite.Play();
+
+            healSFX = new SoundEffect(AssetsManager.GetClip("medikit_pickup"));
         }
 
         public override void Update()
@@ -46,6 +51,8 @@ namespace TopDownShooterAIV
 
             if (collision.other is Player)
             {
+                healSFX.Play(0.25f);
+
                 Enabled = false;
             }
         }

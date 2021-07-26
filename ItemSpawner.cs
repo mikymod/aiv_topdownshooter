@@ -16,6 +16,9 @@ namespace TopDownShooterAIV
 
         private Random rand;
 
+        SoundEffect spawnSFX;
+
+
         public ItemSpawner(int listSize, Player player)
         {
             this.player = player;
@@ -39,6 +42,8 @@ namespace TopDownShooterAIV
                 items.Add(item);
                 GameManager.AddGameObject(item);
             }
+
+            spawnSFX = new SoundEffect(AssetsManager.GetClip("item_spawn"));
         }
 
         public void Update()
@@ -59,6 +64,9 @@ namespace TopDownShooterAIV
                 {
                     items[i].Position = GetRandomPositionNearPlayer();
                     items[i].Enabled = true;
+
+                    spawnSFX.Play(0.2f);
+
                     break;
                 }
             }

@@ -88,7 +88,11 @@ namespace TopDownShooterAIV
             AssetsManager.AddTexture("spawn_points", "Assets/spawn_points.png");
             AssetsManager.AddTexture("heart", "Assets/gui/heart.png");
 
-            AssetsManager.AddClip("rifle_shot", "Assets/shot.wav");
+            AssetsManager.AddClip("rifle_shot", "Assets/rifle_shot.wav");
+            AssetsManager.AddClip("enemy_hurt", "Assets/enemy_hurt.wav");
+            AssetsManager.AddClip("item_spawn", "Assets/item_spawn.wav");
+            AssetsManager.AddClip("powerup_pickup", "Assets/powerup_pickup.wav");
+            AssetsManager.AddClip("medikit_pickup", "Assets/medikit_pickup.wav");
         }
     }
 }

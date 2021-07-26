@@ -15,6 +15,7 @@ namespace TopDownShooterAIV
 
         public float BuffTime { get => buffTime; }
 
+        private SoundEffect pickUpSFX;
         public PowerUp()
         {
             texture = AssetsManager.GetTexture("powerup");
@@ -28,6 +29,8 @@ namespace TopDownShooterAIV
 
             animatedSprite = new AnimatedSprite(sprite, texture, this, 7, 16, 16, 12, false);
             animatedSprite.Play();
+
+            pickUpSFX = new SoundEffect(AssetsManager.GetClip("powerup_pickup"));
         }
 
         public override void Update()
@@ -51,6 +54,8 @@ namespace TopDownShooterAIV
 
             if (collision.other is Player)
             {
+                pickUpSFX.Play(0.25f);
+
                 Enabled = false;
             }
         }
