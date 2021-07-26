@@ -44,6 +44,8 @@ namespace TopDownShooterAIV
             }
 
             spawnSFX = new SoundEffect(AssetsManager.GetClip("item_spawn"));
+
+            enabled = true;
         }
 
         public void Update()
