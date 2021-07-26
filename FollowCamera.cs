@@ -51,8 +51,8 @@ namespace TopDownShooterAIV
 
         private void FixBounds()
         {
-            position.X = MathHelper.Clamp(position.X, 0, GameManager.Window.Width * 2);
-            position.Y = MathHelper.Clamp(position.Y, 0, GameManager.Window.Height * 2);
+            position.X = MathHelper.Clamp(position.X, GameManager.Window.Width * 0.5f, GameManager.Window.Width * 2 - GameManager.Window.Width * 0.5f);
+            position.Y = MathHelper.Clamp(position.Y, GameManager.Window.Height * 0.5f, GameManager.Window.Height * 2 - GameManager.Window.Height * 0.5f);
         }
 
         private void EarthQuake(float magnitude)
