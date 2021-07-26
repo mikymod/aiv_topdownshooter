@@ -13,6 +13,9 @@ namespace TopDownShooterAIV
         {
             GameManager.Init();
 
+            var background = new BackGround();
+            GameManager.AddGameObject(background);
+
             var player = new Player();
             var rifle = new Rifle(player);
 
