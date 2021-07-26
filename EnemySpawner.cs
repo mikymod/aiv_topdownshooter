@@ -16,6 +16,7 @@ namespace TopDownShooterAIV
         private float nextSpawnTime;
 
         private Random rand;
+        private bool enabled;
 
         public EnemySpawner(int listSize, List<SpawnPoint> spawnPoints, Player player)
         {
@@ -33,10 +34,17 @@ namespace TopDownShooterAIV
             rand = new Random(); 
 
             nextSpawnTime = (float)(rand.NextDouble() * 2 + 2);
+
+            enabled = true;
         }
 
         public void Update()
         {
+            if (!enabled)
+            {
+                return;
+            }
+
             nextSpawnTime -= GameManager.DeltaTime;
             if (nextSpawnTime <= 0)
             {
@@ -56,6 +64,16 @@ namespace TopDownShooterAIV
                     enemies[i].Enabled = true;
                     break;
                 }
+            }
+        }
+
+        public void Disable()
+        {
+            enabled = false;
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].Enabled = false;
             }
         }
     }

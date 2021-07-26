@@ -38,8 +38,11 @@ namespace TopDownShooterAIV
             }
 
             enemySpawner = new EnemySpawner(20, spawnPoints, player);
-
             itemSpawner = new ItemSpawner(20, player);
+
+            Player.OnPlayerDeath += enemySpawner.Disable;
+            Player.OnPlayerDeath += itemSpawner.Disable;
+
 
             // GUI
             GuiHealth guiHealth = new GuiHealth(player, new Vector2(20, 20));

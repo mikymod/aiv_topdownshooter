@@ -40,6 +40,8 @@ namespace TopDownShooterAIV
 
         public Vector2 KnockDirection { get; private set; }
 
+        public static event Action OnPlayerDeath;
+
         public Player() : base()
         {
             //texture = new Texture("Assets/player_idle.png");
@@ -235,6 +237,7 @@ namespace TopDownShooterAIV
             if (health <= 0)
             {
                 StateMachine.ChangeState("Dead");
+                OnPlayerDeath?.Invoke();
             }
             else
             {
