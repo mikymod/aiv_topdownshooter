@@ -1,4 +1,5 @@
-﻿using Aiv.Fast2D;
+﻿using Aiv.Audio;
+using Aiv.Fast2D;
 using OpenTK;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,9 @@ namespace TopDownShooterAIV
         private float timer = 0;
         private bool shooted;
 
+        AudioClip clip;
+        SoundEffect shootSFX;
+
         public Rifle(Player player) : base()
         {
             this.Player = player;
@@ -43,6 +47,9 @@ namespace TopDownShooterAIV
                 bullets.Add(bullet);
                 GameManager.AddGameObject(bullet);
             }
+
+            clip = new AudioClip("Assets/shot.wav");
+            shootSFX = new SoundEffect(clip);
         }
 
         public override void Update()
@@ -101,6 +108,8 @@ namespace TopDownShooterAIV
             numShoot++;
 
             shooted = true;
+
+            shootSFX.Play(0.3f);
         }
     }
 }
