@@ -10,12 +10,12 @@ namespace TopDownShooterAIV
 {
     class PowerUp : GameObject
     {
-        private float buffTime = 10f;
+        public const float BuffTime = 10f;
+
         private AnimatedSprite animatedSprite;
 
-        public float BuffTime { get => buffTime; }
-
         private SoundEffect pickUpSFX;
+
         public PowerUp()
         {
             texture = AssetsManager.GetTexture("powerup");

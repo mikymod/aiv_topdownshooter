@@ -191,7 +191,8 @@ namespace TopDownShooterAIV
             powerUps.Add(powerUp);
 
             poweredUp = true;
-            powerUpTime = powerUp.BuffTime;
+            powerUpTime = PowerUp.BuffTime;
+            powerUpTimer = 0;
         }
 
         private void RestoreHealth(float restore)
