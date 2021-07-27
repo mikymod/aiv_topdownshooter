@@ -6,6 +6,7 @@ namespace TopDownShooterAIV
 {
     class ItemSpawner
     {
+        private int listSize;
         private Player player;
         private List<GameObject> items; // Powerup or Medikit
 
@@ -18,6 +19,7 @@ namespace TopDownShooterAIV
 
         public ItemSpawner(int listSize, Player player)
         {
+            this.listSize = listSize;
             this.player = player;
 
             rand = new Random();
@@ -62,18 +64,21 @@ namespace TopDownShooterAIV
 
         private void SpawnItem()
         {
-            for (int i = 0; i < items.Count; i++)
+            var index = rand.Next(0, listSize);
+
+            do
             {
-                if (!items[i].Enabled)
+                if (items[index].Enabled)
                 {
-                    items[i].Position = GetRandomPositionNearPlayer();
-                    items[i].Enabled = true;
-
-                    spawnSFX.Play(0.2f);
-
-                    break;
+                    continue;
                 }
+
+                items[index].Enabled = true;
+                items[index].Position = GetRandomPositionNearPlayer();
             }
+            while (!items[index].Enabled);
+
+            spawnSFX.Play(0.2f);
         }
 
         private Vector2 GetRandomPositionNearPlayer()
