@@ -1,10 +1,5 @@
 ﻿using Aiv.Fast2D;
-using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TopDownShooterAIV
 {
@@ -22,7 +17,7 @@ namespace TopDownShooterAIV
 
         public static void Init()
         {
-            Window = new Window(640, 360, "Top Down Shooter", false);
+            Window = new Window(640, 360, "Top Down Shooter", true);
             Window.SetClearColor(255, 210, 0, 128);
             Window.SetResolution(320, 180);
             Window.SetVSync(false);
