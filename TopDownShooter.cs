@@ -1,4 +1,5 @@
-﻿using Aiv.Fast2D;
+﻿using Aiv.Audio;
+using Aiv.Fast2D;
 using OpenTK;
 using System.Collections.Generic;
 
@@ -8,6 +9,8 @@ namespace TopDownShooterAIV
     {
         EnemySpawner enemySpawner;
         private ItemSpawner itemSpawner;
+
+        private AudioSource bgSource;
 
         public TopDownShooter()
         {
@@ -57,6 +60,10 @@ namespace TopDownShooterAIV
             GameManager.Camera = new FollowCamera(GameManager.Window.OrthoWidth * 0.5f, GameManager.Window.OrthoHeight * 0.5f, player);
             GameManager.Camera.pivot = new Vector2(GameManager.Window.OrthoWidth * 0.5f, GameManager.Window.OrthoHeight * 0.5f);
             GameManager.Window.SetCamera(GameManager.Camera);
+
+            // Background music
+            bgSource = new AudioSource();
+            bgSource.Volume = 0.2f;
         }
 
         public void Run()
@@ -71,6 +78,8 @@ namespace TopDownShooterAIV
                 itemSpawner.Update();
 
                 ((FollowCamera)(GameManager.Camera)).Update();
+
+                bgSource.Stream(AssetsManager.GetClip("music_bg"), GameManager.DeltaTime, true);
 
                 GameManager.Window.Update();
 
@@ -103,6 +112,8 @@ namespace TopDownShooterAIV
             AssetsManager.AddClip("medikit_pickup", "Assets/medikit_pickup.wav");
             AssetsManager.AddClip("player_hurt", "Assets/player_hurt.wav");
             AssetsManager.AddClip("player_death", "Assets/player_death.wav");
+
+            AssetsManager.AddClip("music_bg", "Assets/music_bg.ogg");
         }
     }
 }
